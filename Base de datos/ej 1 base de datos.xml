@@ -1,0 +1,94 @@
+<?xml version='1.0'?>
+<diagram>
+	<elements>
+		<entityid id="47" posX="79" posY="92" name="proveedor"></entityid>
+		<entityid id="48" posX="84" posY="324" name="Producto"></entityid>
+		<entityid id="49" posX="220" posY="495" name="categoria"></entityid>
+		<entityid id="50" posX="473" posY="314" name="Venta"></entityid>
+		<entityid id="51" posX="559" posY="53" name="Cliente"></entityid>
+		<attributeid id="52" posX="62" posY="16" type="normal" name="nombre" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="53" posX="131" posY="22" type="normal" name="direccion" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="56" posX="167" posY="49" type="key" name="id_proveedor" required="true" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="57" posX="174" posY="78" type="normal" name="tel" required="false" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="58" posX="12" posY="53" type="normal" name="pagina web" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="59" posX="19" posY="257" type="key" name="id_producto" required="true" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="60" posX="16" posY="298" type="normal" name="Stock" required="false" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="61" posX="23" posY="348" type="normal" name="nombre" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="62" posX="20" posY="384" type="normal" name="precio actual" required="false" unique="false" datatype="float" length="50"></attributeid>
+		<relationshipid id="64" posX="85" posY="169" name="provee"></relationshipid>
+		<attributeid id="542" posX="659" posY="22" type="multivalued" name="tel-contacto" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="543" posX="658" posY="59" type="key" name="id_cliente" required="true" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="544" posX="662" posY="96" type="normal" name="nombre" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="545" posX="438" posY="359" type="key" name="id_venta" required="true" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="546" posX="510" posY="360" type="normal" name="fecha" required="false" unique="false" datatype="date" length="50"></attributeid>
+		<attributeid id="547" posX="579" posY="360" type="normal" name="descuento" required="false" unique="false" datatype="integer" length="50"></attributeid>
+		<relationshipid id="580" posX="533" posY="178" name="PERTENECE"></relationshipid>
+		<relationshipid id="841" posX="266" posY="324" name="per"></relationshipid>
+		<relationshipid id="1340" posX="135" posY="418" name="per"></relationshipid>
+		<attributeid id="1510" posX="330" posY="436" type="key" name="id-categoria" required="true" unique="false" datatype="integer" length="50"></attributeid>
+		<attributeid id="1511" posX="332" posY="470" type="normal" name="nombre" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+		<attributeid id="1512" posX="327" posY="504" type="normal" name="descripcion" required="false" unique="false" datatype="varchar" length="50"></attributeid>
+	</elements>
+	<entity id="47">
+		<attributelist>
+			<attribute id="52"></attribute>
+			<attribute id="53"></attribute>
+			<attribute id="56"></attribute>
+			<attribute id="57"></attribute>
+			<attribute id="58"></attribute>
+		</attributelist>
+	</entity>
+	<entity id="48">
+		<attributelist>
+			<attribute id="59"></attribute>
+			<attribute id="60"></attribute>
+			<attribute id="61"></attribute>
+			<attribute id="62"></attribute>
+		</attributelist>
+	</entity>
+	<entity id="49">
+		<attributelist>
+			<attribute id="1510"></attribute>
+			<attribute id="1511"></attribute>
+			<attribute id="1512"></attribute>
+		</attributelist>
+	</entity>
+	<entity id="50">
+		<attributelist>
+			<attribute id="545"></attribute>
+			<attribute id="546"></attribute>
+			<attribute id="547"></attribute>
+		</attributelist>
+	</entity>
+	<entity id="51">
+		<attributelist>
+			<attribute id="542"></attribute>
+			<attribute id="543"></attribute>
+			<attribute id="544"></attribute>
+		</attributelist>
+	</entity>
+	<relationship id="64">
+		<rolelist>
+			<role mincard="1" maxcard="1" name="" entityid="47" refintegrity="false"></role>
+			<role mincard="1" maxcard="N" name="" entityid="48" refintegrity="false"></role>
+		</rolelist>
+	</relationship>
+	<relationship id="580">
+		<rolelist>
+			<role mincard="1" maxcard="N" name="" entityid="50" refintegrity="false"></role>
+			<role mincard="1" maxcard="1" name="" entityid="51" refintegrity="false"></role>
+		</rolelist>
+	</relationship>
+	<relationship id="841">
+		<rolelist>
+			<role mincard="1" maxcard="N" name="" entityid="48" refintegrity="false"></role>
+			<role mincard="1" maxcard="N" name="" entityid="50" refintegrity="false"></role>
+		</rolelist>
+	</relationship>
+	<relationship id="1340">
+		<rolelist>
+			<role mincard="1" maxcard="N" name="" entityid="48" refintegrity="false"></role>
+			<role mincard="1" maxcard="1" name="" entityid="49" refintegrity="false"></role>
+		</rolelist>
+	</relationship>
+</diagram>
