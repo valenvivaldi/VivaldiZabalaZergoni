@@ -1,0 +1,1356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class="wf-librebaskerville-n4-active wf-merriweathersans-n4-active wf-merriweathersans-n7-active wf-merriweathersans-i7-active wf-merriweathersans-i4-active wf-active" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Listas en Haskell | Imaginemos un mundo libre</title>
+<link rel="pingback" href="https://ronnyml.wordpress.com/xmlrpc.php">
+<script async="" type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/webfont.js"></script><script type="text/javascript">
+  WebFontConfig = {"google":{"families":["Libre+Baskerville:r:latin,latin-ext","Merriweather+Sans:r,i,b,bi:latin,latin-ext"]}};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://s1.wp.com/wp-content/plugins/custom-fonts/js/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+	})();
+</script><style id="jetpack-custom-fonts-css">.wf-active #container h1{font-family:"Libre Baskerville",serif;font-size:39px;font-weight:400;font-style:normal}.wf-active body{font-family:"Merriweather Sans",sans-serif}.wf-active #content h1, .wf-active #content h2, .wf-active #content h3, .wf-active #content h4, .wf-active #content h5, .wf-active #content h6{font-family:"Libre Baskerville",serif;font-style:normal;font-weight:400}.wf-active #content h2{font-family:"Libre Baskerville",serif;font-size:26px;font-style:normal;font-weight:400}.wf-active #content h2.archive{font-weight:400;font-size:28.6px;font-style:normal}.wf-active .main h3{font-family:"Libre Baskerville",serif;font-size:20.8px;font-weight:400;font-style:normal}.wf-active #sidebar h3{font-family:"Libre Baskerville",serif;font-size:18.2px;font-style:normal;font-weight:400}.wf-active h3.reply{font-size:19.5px;font-style:normal;font-weight:400}</style>
+<link rel="alternate" type="application/rss+xml" title="Imaginemos un mundo libre » Feed" href="https://ronnyml.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Imaginemos un mundo libre » Comments Feed" href="https://ronnyml.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Imaginemos un mundo libre » Listas en Haskell Comments Feed" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+	<link rel="stylesheet" id="all-css-0" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a_002.css" type="text/css" media="all">
+<!--[if IE 6]>
+<link rel='stylesheet' id='journalist-ie6-css'  href='https://s0.wp.com/wp-content/themes/pub/journalist/ie6.css?m=1270837707h&#038;ver=4.4.3-RC1' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="all-css-2" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a.css" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-3" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/global-print.css" type="text/css" media="print">
+<link rel="stylesheet" id="all-css-4" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/global.css" type="text/css" media="all">
+<link media="all" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/css.css" rel="stylesheet"><script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a"></script>
+<link rel="stylesheet" id="all-css-0" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s1.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://ronnyml.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Haskell y la Programación&nbsp;Funcional" href="https://ronnyml.wordpress.com/2007/11/23/haskell-y-la-programacion-funcional/">
+<link rel="next" title="Funciones útiles  en  listas –&nbsp;Haskell" href="https://ronnyml.wordpress.com/2007/12/08/funciones-utiles-en-listas-haskell/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a.html">
+<link rel="shortlink" href="http://wp.me/p5Utv-1d">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=https%3A%2F%2Fronnyml.wordpress.com%2F2007%2F12%2F06%2Flistas-en-haskell%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=https%3A%2F%2Fronnyml.wordpress.com%2F2007%2F12%2F06%2Flistas-en-haskell%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Listas en Haskell">
+<meta property="og:url" content="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/">
+<meta property="og:description" content="Una lista es una estructura de datos que representa un conjunto de datos de un mismo tipo, es muy usada e importante en el lenguaje haskell. Su declaración es muy simple, ejem: [Int]: Representa un…">
+<meta property="article:published_time" content="2007-12-06T23:17:24+00:00">
+<meta property="article:modified_time" content="2012-02-15T09:28:29+00:00">
+<meta property="og:site_name" content="Imaginemos un mundo libre">
+<meta property="og:image" content="https://secure.gravatar.com/blavatar/1ea07b15b7facf24bcb3e360a90bacfc?s=200&amp;ts=1459569490">
+<meta property="og:image:width" content="200">
+<meta property="og:image:height" content="200">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:image" content="https://secure.gravatar.com/blavatar/1ea07b15b7facf24bcb3e360a90bacfc?s=240">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+<link rel="shortcut icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/22e1102a675bba06915d5aa433b346c2?s=16" sizes="16x16">
+<link rel="icon" type="image/x-icon" href="https://secure.gravatar.com/blavatar/22e1102a675bba06915d5aa433b346c2?s=16" sizes="16x16">
+<link rel="apple-touch-icon-precomposed" href="https://secure.gravatar.com/blavatar/1ea07b15b7facf24bcb3e360a90bacfc?s=114">
+<link rel="openid.server" href="https://ronnyml.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="https://ronnyml.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="https://ronnyml.wordpress.com/osd.xml" title="Imaginemos un mundo libre">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+		<style id="wpcom-hotfix-masterbar-style">
+			@media screen and (min-width: 783px) {
+				#wpadminbar .quicklinks li#wp-admin-bar-my-account.with-avatar > a img {
+					margin-top: 5px;
+				}
+			}
+		</style>
+				<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+				<style type="text/css">
+			.recentcomments a {
+				display: inline !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
+
+			table.recentcommentsavatartop img.avatar, table.recentcommentsavatarend img.avatar {
+				border: 0px;
+				margin: 0;
+			}
+
+			table.recentcommentsavatartop a, table.recentcommentsavatarend a {
+				border: 0px !important;
+				background-color: transparent !important;
+			}
+
+			td.recentcommentsavatarend, td.recentcommentsavatartop {
+				padding: 0px 0px 1px 0px;
+				margin: 0px;
+			}
+
+			td.recentcommentstextend {
+				border: none !important;
+				padding: 0px 0px 2px 10px;
+			}
+
+			.rtl td.recentcommentstextend {
+				padding: 0px 10px 2px 0px;
+			}
+
+			td.recentcommentstexttop {
+				border: none;
+				padding: 0px 0px 0px 10px;
+			}
+
+			.rtl td.recentcommentstexttop {
+				padding: 0px 10px 0px 0px;
+			}
+		</style>
+		<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="Imaginemos un mundo libre"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="La paz interior comienza en el momento en el que decides no permitir, que ninguna persona o evento, tome el control de tus emociones."><meta name="msapplication-task" content="name=Subscribe;action-uri=https://ronnyml.wordpress.com/feed/;icon-uri=https://secure.gravatar.com/blavatar/22e1102a675bba06915d5aa433b346c2?s=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s2.wp.com/i/favicon.ico"><meta name="title" content="Listas en Haskell | Imaginemos un mundo libre on WordPress.com">
+<meta name="description" content="Una lista es una estructura de datos que representa un conjunto de datos de un mismo tipo, es muy usada e importante en el lenguaje haskell. Su declaración es muy simple, ejem: [Int]: Representa una lista de enteros [4,5,9,25,60 ] [Char]: Representa una lista de chars ['l','i','n','u','x'] [Bool]: Representa una lista de valores booleanos [True,…">
+		<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/amzn_ads.js"></script>
+		<script type="text/javascript">
+		try { amznads.getAds("3033"); } catch(e) { /* ignore */ }
+		</script><script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/bid"></script>
+		<script type="text/javascript">
+		try {
+			var a9_p = amznads.getKeys(),
+			_ipw_custom = {
+				wordAds: '0',
+				adSafe: '1',
+				domain: 'ronnyml.wordpress.com',
+				pageURL: 'https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/'
+			};
+			if("undefined"!=typeof a9_p&&""!=a9_p&&null!==a9_p&&"[object Array]"===Object.prototype.toString.call(a9_p)){var a="",b=0,c=a9_p.length;a9_p.sort();for(var d=0;d<c;d++){a9_p[d-b]=a9_p[d-b].replace(/a1x6p/,"a160x600p");var e=a9_p[d-b].split("p");e[0]==a&&(a9_p.splice(d-b,1),b++);a=e[0]}_ipw_custom.amznPay=a9_p};document.close();
+		} catch(e) {}
+		</script>		<!-- IPONWEB header script -->
+		<script type="text/javascript">
+			window.__ATA = {
+				scriptSrc: '//s.pubmine.com/showad.js',
+				slotPrefix: 'automattic-id-',
+				initAd: function(o) {
+					var o = o || {},
+						g = window,
+						d = g.document,
+						wr = d.write,
+						id = g.__ATA.id();
+					wr.call(d, '<div id="' + id + '" data-section="' + (o.sectionId || 0) + '"' + (o.type ? ('data-type="' + o.type + '"') : '') + ' ' + (o.forcedUrl ? ('data-forcedurl="' + o.forcedUrl + '"') : '') + ' style="width:' + (o.width || 0) + 'px; height:' + (o.height || 0) + 'px;">');
+					g.__ATA.displayAd(id);
+					wr.call(d, '</div>');
+				},
+				displayAd: function(id) {
+					window.__ATA.ids = window.__ATA.ids || {};
+					window.__ATA.ids[id] = 1;
+				},
+				customParams: _ipw_custom,
+				id: function() {
+					return window.__ATA.slotPrefix + (parseInt(Math.random() * 10000, 10) + 1 + (new Date()).getMilliseconds());
+				}
+			};
+			(function(d, ata) {
+				var pr = "https:" === d.location.protocol ? "https:" : "http:",
+					src = pr + ata.scriptSrc,
+					st = "text/javascript";
+				d.write('<scr' + 'ipt type="' + st + '" src="' + src + '"><\/scr' + 'ipt>');
+			})(window.document, window.__ATA);
+		</script><script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/showad.js"></script>
+		<script type="text/javascript">
+		jQuery(window).ready(function () {
+			jQuery("a.wpa-about").text("About these ads");
+		});
+		</script><link rel="amphtml" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ga.js" async="" type="text/javascript"></script>
+</head>
+
+<body class="single single-post postid-75 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="container" class="group">
+
+<h1><a href="https://ronnyml.wordpress.com/">Imaginemos un mundo libre</a></h1>
+<div id="bubble"><p>La paz interior comienza en el momento en el que 
+decides no permitir, que ninguna persona o evento, tome el control de 
+tus emociones.</p></div> <!-- erase this line if you want to turn the bubble off -->
+
+<div id="content" class="group">
+<div class="post-75 post type-post status-publish format-standard hentry category-haskell tag-funciones-en-haskell tag-haskell tag-listas-en-haskell tag-listas-haskell tag-listas-por-comprension-haskell">
+	<h2 id="post-75">Listas en Haskell</h2>
+			<p class="comments"><a href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/#comments">with 18 comments</a></p>
+	
+	<div class="main">
+		<p>Una lista es una estructura de datos que representa un <strong>conjunto de datos de un mismo tipo</strong>, es muy usada e importante en el lenguaje haskell.</p>
+<p>Su declaración es muy simple, ejem:</p>
+<p>[Int]: Representa una lista de enteros [4,5,9,25,60 ]</p>
+<p>[Char]: Representa una lista de chars [‘l’,’i’,’n’,’u’,’x’]</p>
+<p>[Bool]: Representa una lista de valores booleanos [True, False, True]</p>
+<p>[String]: Representa una lista de strings [“buenas”,”noches”]</p>
+<p>[Float]: Representa una lista de flotantes [2.5,5.8,4.3,7.1 ]</p>
+<p>También podríamos definir una lista de listas así: [[Int]], pero eso 
+lo veremos más adelant con el tema de matrices. Una lista vacía se 
+representa [] y algo importante para el manejo de listas es separar el 
+primer elemento (cabeza), del resto(cola) de la sgt manera(x:xs) . X 
+representa la cabeza y xs la cola.</p>
+<p>Como Haskell hace mucho uso de la recursividad entonces, debemos 
+tener en cuenta cuando deterne la operación recursiva y para ello 
+necesitamos un caso base.</p>
+<p>Vamos a ver algunos ejemplos:</p>
+<p>1.- Sumar los elementos de una lista.En este caso, el caso base es 
+que la lista se encuentre vacía y devuelve 0, mientras tanto que siga 
+sumando los elementos con la operación recursiva.</p>
+<p>sumar::[Int]-&gt;Int<br>
+sumar [ ] = 0<br>
+sumar (x:xs) = x + sumar(xs)</p>
+<p>Main&gt; sumar [5,4,7,8]<br>
+24<br>
+2.- Invertir una lista: El operador Ord me sirve para indicar que representa a cualquier tipo de dato.</p>
+<p>invertir::Ord a=&gt;[a]-&gt;[a]<br>
+invertir [ ] = [ ]<br>
+invertir (x:xs) = (invertir xs)++[x]</p>
+<p>Main&gt; invertir [5,4,7,8]<br>
+[8,7,4,5]</p>
+<p>3.- Comparar si 2 listas son iguales:</p>
+<p>igualLista:: Eq a =&gt; [a]-&gt;[a]-&gt;Bool<br>
+igualLista l1 l2 = l1 == l2</p>
+<p>Main&gt; igualLista [“Hola”,”Mundo”] [“Mundo”,”Hola”]<br>
+False</p>
+<p>4.- Comprobar si una lista esta ordenada: En este caso ‘y’ representa al 2do elemento de la lista.</p>
+<p>lista_ordenada::Ord a=&gt;[a]-&gt;Bool<br>
+lista_ordenada [] = True<br>
+lista_ordenada [_] = True<br>
+lista_ordenada (x:y:xs) = (x&lt;=y) &amp;&amp; lista_ordenada (y:xs)</p>
+<p>Main&gt; lista_ordenada [‘a’,’b’,’c’,’d’]<br>
+True</p>
+<p>5.- Mostrar el elemento que se encuentra en cierta ubicacion:Como en un array el 1er elemento esta en la ubicacion 0.</p>
+<p>mostrar_ubicacion::Ord a=&gt;[a]-&gt;Int-&gt;a<br>
+mostrar_ubicacion l n = l!!n</p>
+<p>Main&gt; mostrar_ubicacion [15,25,26,28] 2<br>
+26</p>
+<p>6.- Mayor elemento de una lista:</p>
+<p>mayor::[Int]-&gt;Int<br>
+mayor (x:xs)<br>
+| x &gt; mayor(xs) = x<br>
+| otherwise = mayor(xs)</p>
+<p>Main&gt; mayor [78,24,56,93,21,237,46,74,125]<br>
+237</p>
+<p>Listas por comprensión: Son listas que no usan cabeza y cola, sino 
+ciertos argumentos para definir los elementos que pertenecen a ella, de 
+esta manera resolvemos problemas de una manera muy elegante y potente. 
+Ejm: Le decimos a haskell que queremos una lista de elementos x, tales 
+que x este en el rango de 1 a 12.</p>
+<p>Main&gt; [x | x &lt;- [1 .. 12]]<br>
+[1,2,3,4,5,6,7,8,9,10,11,12]</p>
+<p>Apliquemos esto a las operaciones con listas.</p>
+<p>1.- Contar cuantos elementos pares hay en una lista. Estamos diciendo
+ que x pertenece a la lista y ademas debe cumplir la condición de ser 
+par. Como en varios lenguajes el length cuenta los elementos.</p>
+<p>contarpares::[Int]-&gt;Int<br>
+contarpares []=0<br>
+contarpares lista= length [x | x &lt;- lista, mod x 2 ==0]</p>
+<p>Main&gt; contarpares [5,4,7,8]<br>
+2</p>
+<p>2.- Devolver los cuadrados de una lista:</p>
+<p>cuadrados::[Int]-&gt;[Int]<br>
+cuadrados [ ] = [ ]<br>
+cuadrados l = [x*x| x &lt;- l]</p>
+<p>Main&gt; cuadrados [1..10]<br>
+[1,4,9,16,25,36,49,64,81,100]</p>
+<p>3.- Devolver una lista de&nbsp; numeros primos de 1 a n: Para ello 
+debemos crear nuestra funcion para saber si un numero es primo o no y 
+despues la aplicamos a la lista por comprensión:</p>
+<p>divisible::Int-&gt;Int-&gt;Bool<br>
+divisible x y = (mod x y) ==0</p>
+<p>divisibles::Int-&gt;[Int]<br>
+divisibles x = [y | y &lt;-[1..x],divisible x y]</p>
+<p>esPrimo::Int-&gt;Bool<br>
+esPrimo n = length (divisibles n) &lt;=2</p>
+<p>primos::Int-&gt;[Int]<br>
+primos n = [x | x &lt;-[1..n],esPrimo x]</p>
+<p>Main&gt; primos 100<br>
+[1,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]</p>
+<p>Gracias por tu visita al blog. Puedes seguirme en Twitter haciendo click en el siguiente enlace: <a href="https://twitter.com/ronnyml" class="twitter-follow-button" data-show-count="false" data-text-color="#1c1c1c" data-link-color="#004276">Follow @ronnyml</a></p>
+		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<a class="wpa-about" href="https://wordpress.com/about-these-ads/" rel="nofollow"></a>
+				<div class="u">
+					<script type="text/javascript">
+					(function(g){g.__ATA.initAd({sectionId:26942, width:300, height:250});})(window);
+					</script><div id="automattic-id-5603" data-section="26942" style="width:300px; height:250px;"><iframe src="javascript:&quot;<html><body style='background:transparent;margin:0%;'></body></html>&quot;" id="fif_slot_automattic-id-_automattic-id-5603" name="fif_slot_automattic-id-_automattic-id-5603" scrolling="no" style="border:none;width:300px;height:250px;" frameborder="0" height="250" width="300"></iframe></div>
+				</div>
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled"><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-1408733-75-56ff435256dd2" data-src="//widgets.wp.com/likes/#blog_id=1408733&amp;post_id=75&amp;origin=ronnyml.wordpress.com&amp;obj_id=1408733-75-56ff435256dd2" data-name="like-post-frame-1408733-75-56ff435256dd2"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div></div>			</div>
+
+	<div class="meta group">
+		<div class="signature">
+			<p>Written by Ronny Yabar <span class="edit"></span></p>
+			<p>December 6, 2007 at 6:17 pm</p>
+		</div>
+		<div class="tags">
+			<p>Posted in <a href="https://ronnyml.wordpress.com/category/haskell/" rel="category tag">Haskell</a></p>
+			<p>Tagged with <a href="https://ronnyml.wordpress.com/tag/funciones-en-haskell/" rel="tag">Funciones en Haskell</a>, <a href="https://ronnyml.wordpress.com/tag/haskell/" rel="tag">Haskell</a>, <a href="https://ronnyml.wordpress.com/tag/listas-en-haskell/" rel="tag">Listas en Haskell</a>, <a href="https://ronnyml.wordpress.com/tag/listas-haskell/" rel="tag">Listas Haskell</a>, <a href="https://ronnyml.wordpress.com/tag/listas-por-comprension-haskell/" rel="tag">Listas por comprensión Haskell</a></p>		</div>
+	</div>
+</div>
+<div class="navigation group">
+	<div class="alignleft">« <a href="https://ronnyml.wordpress.com/2007/11/23/haskell-y-la-programacion-funcional/" rel="prev">Haskell y la Programación&nbsp;Funcional</a></div>
+	<div class="alignright"><a href="https://ronnyml.wordpress.com/2007/12/08/funciones-utiles-en-listas-haskell/" rel="next">Funciones útiles  en  listas –&nbsp;Haskell</a> »</div>
+</div>
+
+
+<a name="comments" id="comments"></a>
+
+<h3 class="reply">18 Responses</h3>
+<p class="comment_meta">Subscribe to comments with <a href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/feed/">RSS</a>.</p>
+
+<ol class="commentlist">
+<li id="comment-12" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-12">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>un pequeño fallo, el 1 no sale en la lista, ya que la condicion es 
+que se hayan contado solo dos numeros que dividen exactamente al numero (
+ los primos solo son divisibles por ellos mismo y por el uno ) , pero 
+claro, el 1 solo se divide por el mismo, por lo que solo se cuenta 1 vez</p>
+<p>luego habria que cambiar la condicion ‘==’ por ‘&lt;=’ y el uno ya sale en la lista ^_^</p>
+<p>gracias por hacer este blog, me esta ayudando mucho con mis practicas en la facultad !</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/9e820aecf598851efa728f4f0e0abb34.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">vico</strong></p>
+	<p><small>
+		March 31, 2008 at <a href="#comment-12">2:37 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=12#respond" onclick='return addComment.moveForm( "div-comment-12", "12", "respond", "75" )' aria-label="Reply to vico">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-19" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-19">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>muy buen trabajo, ya que se presenta buena informacion acerca de las listas de haskell</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/16a4908aee7a5d75d8f4762ae82cc7da.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">ismael</strong></p>
+	<p><small>
+		April 28, 2008 at <a href="#comment-19">3:56 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=19#respond" onclick='return addComment.moveForm( "div-comment-19", "19", "respond", "75" )' aria-label="Reply to ismael">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-205" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-205">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Hola,soy un principiante con haskell. Estoy cursando paradigma y no 
+se como hacer para ingresar o complilar los ejemplos,si sos muy amable 
+me podes explicar como hacerlo…. Otra es que no tengo irea como hacer 
+una lista de caracteres,a los pares pasarlos a mayuscula y a los impares
+ en minuscula y como concatenar dos listas,si podes haceme el favor de 
+darme una ayuda.muchas gracias y que dios te bendiga… contestame lo mas 
+antes posible.Muchisimas gracias…</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/aaceed6a497e6997f341daacc6c594df.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">david</strong></p>
+	<p><small>
+		September 24, 2008 at <a href="#comment-205">12:46 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=205#respond" onclick='return addComment.moveForm( "div-comment-205", "205", "respond", "75" )' aria-label="Reply to david">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-208" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-208">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>necesito saber que significa la barra vertical que figura despues de
+ x contarpares lista= length [x | x &lt;- lista, mod x 2 ==0]<br>
+estoy estudiando en la Tecnologica de Tucuman. Gracias por todo</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/6f2d9433789abca458bf13072218b505.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">alejandra</strong></p>
+	<p><small>
+		October 8, 2008 at <a href="#comment-208">2:04 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=208#respond" onclick='return addComment.moveForm( "div-comment-208", "208", "respond", "75" )' aria-label="Reply to alejandra">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-217" class="comment byuser comment-author-ronnyml bypostauthor even thread-even depth-1  byuser comment-author-ronnyml bypostauthor highlander-comment highlander-comment">
+	<div id="div-comment-217">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>David Los ejemplos puedes probarlos con el intérprete <a href="http://haskell.org/hugs/" title="hugs" rel="nofollow">hugs</a>, que está disponible para múltiples plataformas (Linux, Mac, Windows, etc).<br>
+No te entendí muy bien sobre lo de conversión de caracteres pares o impares podrías ser más explícito. </p>
+<p>En el caso de concatenar 2 listas es simple: Aquí está el código. </p>
+<p>conc_lists::[a]-&gt;[a]-&gt;[a]<br>
+conc_lists  xs [] = xs<br>
+conc_lists  [] ys = ys<br>
+conc_lists  (x:xs) (y:ys) = x: (conc_lists xs (y:ys))</p>
+<p>Ejemplo:</p>
+<p>Main&gt; conc_lists[1,2,3][4,5,6]<br>
+[1,2,3,4,5,6]</p>
+<p>Te lo explico brevemente: </p>
+<p>Tu función se llama conc_list, Primero declaras tus argumentos de entrada y salida.</p>
+<p>Recibes una lista, otra lista y te da como resultado igualmente una 
+lista concatenada. Preguntas si alguna de las listas en vacía, si es así
+ devuelve la otra lista. </p>
+<p>Por último, tomamos las 2 listas y empezamos a concatenar la cabeza 
+de la lista 1 y empezamos a llamar recursivamente a la función para que 
+concatene la cola de la lista 1 con los elementos de la lista 2.</p>
+<p>Tienes que tener bien en claro, lo que es la cabeza y cola de la 
+lista y lo que significa recursión (una función que se llama así misma).</p>
+<p>Espero te sirva, cualquier consulta avisas. Saludos</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/e63c98a1b11f9b1842b9a31fd27b4e71.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">ronnyml</strong></p>
+	<p><small>
+		October 29, 2008 at <a href="#comment-217">4:42 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=217#respond" onclick='return addComment.moveForm( "div-comment-217", "217", "respond", "75" )' aria-label="Reply to ronnyml">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-218" class="comment byuser comment-author-ronnyml bypostauthor odd alt thread-odd thread-alt depth-1  byuser comment-author-ronnyml bypostauthor highlander-comment highlander-comment">
+	<div id="div-comment-218">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Alejandra la barra vertical indica la condición que debe cumplir la 
+misma variable x para poder ser tomada en cuenta por la función length. 
+ Es como una asignación a lo que debe ser x.</p>
+<p>En este caso se leería x tal que x pertenece a la variable lista y 
+además de ello que cumpla con la condición de que su división entre 2 de
+ como residuo cero.</p>
+<p>Espero aclare tu duda. Saludos</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/e63c98a1b11f9b1842b9a31fd27b4e71.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">ronnyml</strong></p>
+	<p><small>
+		October 29, 2008 at <a href="#comment-218">4:56 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=218#respond" onclick='return addComment.moveForm( "div-comment-218", "218", "respond", "75" )' aria-label="Reply to ronnyml">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-417" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-417">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>hola! estaba viendo el ejemplo de como buscar el mayor elemento de 
+una lista, y lo transcribi en el archivo de winhugs.cuando lo ejecute , 
+me daba un error. y era por que le falta agregar la condicion, de que si
+ la lista esta vacia, el resultado debe de ser cero. seria lo siguiente:</p>
+<p>mayor::[Int]-&gt;Int<br>
+mayor [ ] = 0<br>
+mayor (x:xs)<br>
+| x &gt; mayor(xs) = x<br>
+| otherwise = mayor(xs)</p>
+<p>gracias!!! los ejemplos me sirvieron de mucho!!</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/baa55f594f9179f015bbd920fce29f98.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">anasol</strong></p>
+	<p><small>
+		August 3, 2009 at <a href="#comment-417">7:00 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=417#respond" onclick='return addComment.moveForm( "div-comment-417", "417", "respond", "75" )' aria-label="Reply to anasol">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-429" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-429">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Para concatenar listas en una lista de listas en el entorno hugs es 
+posible emplear “concat”,  que concatena listas de la siguiente manera:<br>
+main&gt;concat [[1,2,3],[5,4,2]]<br>
+main&gt;[1,2,3,5,4,2]<br>
+Talves prodrias encontrar algunos ejemplos en :<br>
+<a href="http://www.program.webcindario.com/codigos/haskell.html" rel="nofollow">http://www.program.webcindario.com/codigos/haskell.html</a><br>
+en esa página hay algunos ejemplos</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/06682a00f7dc27797fb998bd68910a80.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://www.prograx.tk/" rel="external nofollow" class="url">John</a></strong></p>
+	<p><small>
+		August 14, 2009 at <a href="#comment-429">1:56 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=429#respond" onclick='return addComment.moveForm( "div-comment-429", "429", "respond", "75" )' aria-label="Reply to John">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-455" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-455">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Interesante aporte ronnyl<br>
+Las listas nos permiten estructurar de una mejor manera nuestros datos.</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/5bcbe3ffc314836cdb43a11ee0e460ad.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://program.webcindario.com/" rel="external nofollow" class="url">Marck</a></strong></p>
+	<p><small>
+		September 15, 2009 at <a href="#comment-455">3:25 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=455#respond" onclick='return addComment.moveForm( "div-comment-455", "455", "respond", "75" )' aria-label="Reply to Marck">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-468" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-468">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Gracias ronnyl por tus consejos, espero que sigas publicando mas articulos, que a muchos nos sirve bastante</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ec63f62821acc94c466005aa3fc42070.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://gane-dinero.galeon.com/" rel="external nofollow" class="url">maria</a></strong></p>
+	<p><small>
+		October 2, 2009 at <a href="#comment-468">4:02 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=468#respond" onclick='return addComment.moveForm( "div-comment-468", "468", "respond", "75" )' aria-label="Reply to maria">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-489" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-489">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>hola, necesitaria una ayuda…tengo un ejercisio que no lo puedo 
+hacer..pude hacerlo pero usando dos funciones mas que prediseñe…quisiera
+ saber si se puede hacer este ejercisio en una función:<br>
+“Implementar en Haskell una función que dada una lista de enteros, 
+devuelva una única tupla con dos listas con los números discriminados en
+ función de un criterio dado como argumento (Función lógica).”</p>
+<p>yo el criterio que elegí fue pasar la lista y un número y q discrimine en multiplos o no(con mod x n)<br>
+[Int] -&gt; Int -&gt; ([Int],[Int])</p>
+<p>gracias</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/eb62bb35721d82cb7cc6e7b5fa40dd68.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">Rubén</strong></p>
+	<p><small>
+		November 11, 2009 at <a href="#comment-489">2:39 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=489#respond" onclick='return addComment.moveForm( "div-comment-489", "489", "respond", "75" )' aria-label="Reply to Rubén">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-497" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-497">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Ese ejercicio lo podes resolver asi:<br>
+funcion ::[Int]-&gt;([Int],[Int])<br>
+funcion [] = ([],[])<br>
+funcion (x:xs)<br>
+        |x&gt;5 = (x:a,b)<br>
+        |otherwise = (a,x:b)<br>
+            where (a,b) = funcion xs<br>
+Vos podes cambiarle la funcion logica y hacer con el mod x 2,pero seria una solucion a tu ejercicio.</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/9fd33a563515f9665dca5194302cd363.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">Cynthia</strong></p>
+	<p><small>
+		November 24, 2009 at <a href="#comment-497">5:41 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=497#respond" onclick='return addComment.moveForm( "div-comment-497", "497", "respond", "75" )' aria-label="Reply to Cynthia">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-498" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-498">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Tengo un  ejercicio en Haskell q me pideque rote los elemento de la 
+lista dado un valor si es positivo hacia la izquiera y si es negativo 
+hacia la derecha.Por ejemplo: [1,2,3,4] 2-&gt;   [4,3,1,2]<br>
+[1,2,3,4] -1 -&gt; [2,3,4,1]<br>
+la 1º parte la resolvi pero no se como plantear la 2º<br>
+rota:: Int-&gt;[a]-&gt;[a]<br>
+rota n xs = drop n xs ++ take n xs</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/9fd33a563515f9665dca5194302cd363.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">Cynthia</strong></p>
+	<p><small>
+		November 24, 2009 at <a href="#comment-498">5:44 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=498#respond" onclick='return addComment.moveForm( "div-comment-498", "498", "respond", "75" )' aria-label="Reply to Cynthia">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-505" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-505">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Hola!! Un gran artículo, sirve de mucha ayuda para los que estamos iniciándonos en el conocimiento del lenguaje Haskell.</p>
+<p>Tengo una duda, muy simple de realizar seguramente, pero para mi que 
+soy un novato no tengo muy claro como realizarlo. Es un ejercicio en el 
+que tengo que definir una función partir que divida una lista en dos 
+mitades con el mismo número de elementos (+- 1). Alguien podría 
+ayudarme?¿ Lo agradecería mucho.</p>
+<p>Un saludo!!</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/374b7d4904e14202f344ee0c8a3cd7dc.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn">Jose</strong></p>
+	<p><small>
+		December 2, 2009 at <a href="#comment-505">10:32 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=505#respond" onclick='return addComment.moveForm( "div-comment-505", "505", "respond", "75" )' aria-label="Reply to Jose">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-628" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-628">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Hola , muy buen post !</p>
+<p>Un pequeño detalle para el punto 6 .</p>
+<p>Falta una expresion para machear la lista vacia ,<br>
+porque sino cuando llegues al final de la lista  va a explotar porque no
+ puede machear [] con (x:xs) . O en el caso de que hagas : mayor [] 
+tambien dara error de macheo.</p>
+<p>entonces podria quedar:<br>
+mayor [] = 0<br>
+mayor (x:xs) | x &gt; mayor(xs) = x<br>
+             | otherwise = mayor(xs)</p>
+<p>Saludos<br>
+Pablo</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/80d2ad4ad0fd06025bdd2c30c32b585a.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://-/" rel="external nofollow" class="url">pablo</a></strong></p>
+	<p><small>
+		July 20, 2010 at <a href="#comment-628">10:14 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=628#respond" onclick='return addComment.moveForm( "div-comment-628", "628", "respond", "75" )' aria-label="Reply to pablo">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-629" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-629">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>Estoy empezando a utilizar este lenguaje, y me encontre con este 
+post que me parecio muy bueno, muchas gracias espero que sigas 
+publicando</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/70ff58bdb645a54e04ca0381eb13fdc1.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://ganardinerox.blogspot.com/" rel="external nofollow" class="url">marco antonio</a></strong></p>
+	<p><small>
+		August 10, 2010 at <a href="#comment-629">12:38 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=629#respond" onclick='return addComment.moveForm( "div-comment-629", "629", "respond", "75" )' aria-label="Reply to marco antonio">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-630" class="comment even thread-even depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-630">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>en anterior oportunidad me dieron una tarea para hacer una lista y 
+no tenia ni idea y fui buscando y me encontre con esto gracias ronyl.</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/70ff58bdb645a54e04ca0381eb13fdc1.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://dinerointenetx.blogspot.com/" rel="external nofollow" class="url">marco antonio</a></strong></p>
+	<p><small>
+		August 10, 2010 at <a href="#comment-630">12:42 pm</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=630#respond" onclick='return addComment.moveForm( "div-comment-630", "630", "respond", "75" )' aria-label="Reply to marco antonio">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+<li id="comment-671" class="comment odd alt thread-odd thread-alt depth-1  highlander-comment highlander-comment">
+	<div id="div-comment-671">
+	<div class="comment_mod">
+		</div>
+
+	<div class="comment_text">
+	<p>¡Hola! Excelente tutorial introductorio a Haskell. Realmente me 
+sirvió muchísimo para hacer algunas definiciones recursivas para un 
+trabajo universitario de lenguajes formales.<br>
+Les quería agradecer, y de paso dejarles las definiciones (son muy 
+sencillas por cierto, no esperen la gran cosa… pero bueno, quizá a 
+alguien le sirva).</p>
+<p><a href="http://www.webayunate.com/wp-content/uploads/2010/10/Definiciones-de-funciones-recursivas-en-Haskell.txt" rel="nofollow">Definiciones Haskell</a></p>
+<p>Saludos, y muchas gracias nuevamente</p>
+	</div>
+
+	<div class="comment_author vcard">
+	<img alt="" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/31839eb98d3e04dda5b9aec0c66cd485.jpeg" class="avatar avatar-32" height="32" width="32">	<p><strong class="fn"><a href="http://www.webayunate.com.ar/" rel="external nofollow" class="url">vKmC</a></strong></p>
+	<p><small>
+		October 28, 2010 at <a href="#comment-671">8:00 am</a>			</small></p>
+	</div>
+	<div class="clear"></div>
+
+	<div class="reply">
+		<a rel="nofollow" class="comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/?replytocom=671#respond" onclick='return addComment.moveForm( "div-comment-671", "671", "respond", "75" )' aria-label="Reply to vKmC">Reply</a>	</div>
+	</div>
+</li><!-- #comment-## -->
+</ol>
+<div class="navigation">
+	<div class="alignleft"></div>
+	<div class="alignright"></div>
+</div>
+<br>
+
+	
+
+
+				<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/#respond" style="display:none;">Cancel reply</a></small></h3>				<form action="https://ronnyml.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+					<input id="highlander_comment_nonce" name="highlander_comment_nonce" value="c4e3a74e28" type="hidden"><input name="_wp_http_referer" value="/2007/12/06/listas-en-haskell/" type="hidden">
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	<label for="comment">Enter your comment here...</label>
+	<div id="comment-form-comment"><textarea id="comment" name="comment" title="Enter your comment here..."></textarea></div>
+</div>
+
+<div id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a_002.html" scrolling="no" allowtransparency="true" seamless="seamless" frameborder="0" height="24" width="24"></iframe>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ad516503a11cd5ca435acc9bb6523536.jpeg" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text"></div>
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ad516503a11cd5ca435acc9bb6523536.jpeg" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ad516503a11cd5ca435acc9bb6523536.jpeg" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ad516503a11cd5ca435acc9bb6523536.jpeg" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/ad516503a11cd5ca435acc9bb6523536.jpeg" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="" type="hidden">
+				<input name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="" type="hidden">
+				<p class="comment-form-posting-as pa-googleplus"><strong></strong> You are commenting using your Google+ account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'googleplus'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe">
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p><p class="post-subscription-form"><input name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto;" tabindex="7" type="checkbox"> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog" style="display: inline;">Notify me of new posts via email.</label></p></div>
+
+
+
+
+<p class="form-submit"><input name="submit" id="comment-submit" class="submit" value="Post Comment" type="submit"> <input name="comment_post_ID" value="75" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</p><p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="a6d4cd57f4" type="hidden"></p>
+<input name="genseq" value="1459569490" type="hidden">
+<p style="display: none;"></p>				<input id="ak_js" name="ak_js" value="1459569670921" type="hidden"></form>
+					</div><!-- #respond -->
+		<div style="clear: both"></div>
+
+
+</div>
+
+<div id="sidebar">
+<form role="search" method="get" id="searchform" class="searchform" action="https://ronnyml.wordpress.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input name="s" id="s" type="text">
+					<input id="searchsubmit" value="Search" type="submit">
+				</div>
+			</form><h3></h3><div style="overflow: hidden;"><a href="https://ronnyml.wordpress.com/category/aldea-yanapay/" style="font-size: 130.2380952381%; padding: 1px; margin: 1px;" title="Aldea Yanapay (3)">Aldea Yanapay</a> <a href="https://ronnyml.wordpress.com/category/android/" style="font-size: 168.33333333333%; padding: 1px; margin: 1px;" title="Android (8)">Android</a> <a href="https://ronnyml.wordpress.com/category/arequipa/" style="font-size: 160.71428571429%; padding: 1px; margin: 1px;" title="Arequipa (7)">Arequipa</a> <a href="https://ronnyml.wordpress.com/category/argentina/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Argentina (2)">Argentina</a> <a href="https://ronnyml.wordpress.com/category/bolivia/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Bolivia (2)">Bolivia</a> <a href="https://ronnyml.wordpress.com/category/books/" style="font-size: 175.95238095238%; padding: 1px; margin: 1px;" title="Books (9)">Books</a> <a href="https://ronnyml.wordpress.com/category/brasil/" style="font-size: 145.47619047619%; padding: 1px; margin: 1px;" title="Brasil (5)">Brasil</a> <a href="https://ronnyml.wordpress.com/category/c/" style="font-size: 153.09523809524%; padding: 1px; margin: 1px;" title="C++ (6)">C++</a> <a href="https://ronnyml.wordpress.com/category/cerebro/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Cerebro (2)">Cerebro</a> <a href="https://ronnyml.wordpress.com/category/colombia/" style="font-size: 115%; padding: 1px; margin: 1px;" title="Colombia (1)">Colombia</a> <a href="https://ronnyml.wordpress.com/category/cultura-hacker/" style="font-size: 160.71428571429%; padding: 1px; margin: 1px;" title="Cultura Hacker (7)">Cultura Hacker</a> <a href="https://ronnyml.wordpress.com/category/cusco/" style="font-size: 275%; padding: 1px; margin: 1px;" title="Cusco (22)">Cusco</a> <a href="https://ronnyml.wordpress.com/category/debian/" style="font-size: 153.09523809524%; padding: 1px; margin: 1px;" title="Debian (6)">Debian</a> <a href="https://ronnyml.wordpress.com/category/django/" style="font-size: 130.2380952381%; padding: 1px; margin: 1px;" title="Django (3)">Django</a> <a href="https://ronnyml.wordpress.com/category/documentales/" style="font-size: 153.09523809524%; padding: 1px; margin: 1px;" title="Documentales (6)">Documentales</a> <a href="https://ronnyml.wordpress.com/category/games/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Games (2)">Games</a> <a href="https://ronnyml.wordpress.com/category/google-summer-of-code/" style="font-size: 191.19047619048%; padding: 1px; margin: 1px;" title="Google Summer of Code (11)">Google Summer of Code</a> <a href="https://ronnyml.wordpress.com/category/haskell/" style="font-size: 145.47619047619%; padding: 1px; margin: 1px;" title="Haskell (5)">Haskell</a> <a href="https://ronnyml.wordpress.com/category/kde/" style="font-size: 252.14285714286%; padding: 1px; margin: 1px;" title="KDE (19)">KDE</a> <a href="https://ronnyml.wordpress.com/category/lima/" style="font-size: 137.85714285714%; padding: 1px; margin: 1px;" title="Lima (4)">Lima</a> <a href="https://ronnyml.wordpress.com/category/linux/" style="font-size: 160.71428571429%; padding: 1px; margin: 1px;" title="Linux (7)">Linux</a> <a href="https://ronnyml.wordpress.com/category/mountain-biking/" style="font-size: 191.19047619048%; padding: 1px; margin: 1px;" title="Mountain Biking (11)">Mountain Biking</a> <a href="https://ronnyml.wordpress.com/category/music-2/" style="font-size: 160.71428571429%; padding: 1px; margin: 1px;" title="Music (7)">Music</a> <a href="https://ronnyml.wordpress.com/category/nikola-tesla/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Nikola Tesla (2)">Nikola Tesla</a> <a href="https://ronnyml.wordpress.com/category/nokia/" style="font-size: 130.2380952381%; padding: 1px; margin: 1px;" title="Nokia (3)">Nokia</a> <a href="https://ronnyml.wordpress.com/category/open-source-2/" style="font-size: 214.04761904762%; padding: 1px; margin: 1px;" title="Open Source (14)">Open Source</a> <a href="https://ronnyml.wordpress.com/category/opinion/" style="font-size: 191.19047619048%; padding: 1px; margin: 1px;" title="Opinión (11)">Opinión</a> <a href="https://ronnyml.wordpress.com/category/personal/" style="font-size: 198.80952380952%; padding: 1px; margin: 1px;" title="Personal (12)">Personal</a> <a href="https://ronnyml.wordpress.com/category/peru/" style="font-size: 183.57142857143%; padding: 1px; margin: 1px;" title="Perú (10)">Perú</a> <a href="https://ronnyml.wordpress.com/category/planet-kde/" style="font-size: 130.2380952381%; padding: 1px; margin: 1px;" title="Planet KDE (3)">Planet KDE</a> <a href="https://ronnyml.wordpress.com/category/planet-kde-es/" style="font-size: 115%; padding: 1px; margin: 1px;" title="Planet KDE-es (1)">Planet KDE-es</a> <a href="https://ronnyml.wordpress.com/category/programming-books/" style="font-size: 122.61904761905%; padding: 1px; margin: 1px;" title="Programming Books (2)">Programming Books</a> <a href="https://ronnyml.wordpress.com/category/qt/" style="font-size: 183.57142857143%; padding: 1px; margin: 1px;" title="Qt (10)">Qt</a> <a href="https://ronnyml.wordpress.com/category/randy-pausch/" style="font-size: 115%; padding: 1px; margin: 1px;" title="Randy Pausch (1)">Randy Pausch</a> <a href="https://ronnyml.wordpress.com/category/ruby-on-rails/" style="font-size: 168.33333333333%; padding: 1px; margin: 1px;" title="Ruby on Rails (8)">Ruby on Rails</a> <a href="https://ronnyml.wordpress.com/category/software-libre/" style="font-size: 160.71428571429%; padding: 1px; margin: 1px;" title="Software Libre (7)">Software Libre</a> <a href="https://ronnyml.wordpress.com/category/traveling/" style="font-size: 267.38095238095%; padding: 1px; margin: 1px;" title="Traveling (21)">Traveling</a> <a href="https://ronnyml.wordpress.com/category/trekking/" style="font-size: 130.2380952381%; padding: 1px; margin: 1px;" title="Trekking (3)">Trekking</a> </div><h3>. My Android apps</h3>
+	<ul class="xoxo blogroll">
+<li><a href="https://play.google.com/store/apps/details?id=com.musicnetwork.therockcorner" title="TheRockCorner" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/6hgDHayrF9kUmVPgOooT_ShXXlXKG1dRC47IIgDrlSilHowonhhmIEtvDxu.jpeg" alt="0 TheRockCorner" title="TheRockCorner"></a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.musicnetwork.rockalpalo" title="RockAlPalo" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/15Tp4U5IgDG2Ablsx3e5ZkM5P0WwHoWQ09iv1WSESUWSCWKRCgYR3NQMTAa.jpeg" alt="1 RockAlPalo" title="RockAlPalo"></a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.musicnetwork.mexicorockea" title="MéxicoRockea" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/mTHLpfoXe40spyQ66WwNSkQXylZexn2NDMQcjdtE-SbPSiKKzE-UMTiRAf4X.png" alt="2 MéxicoRockea" title="MéxicoRockea"></a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.musicnetwork.puroreggae" title="PuroReggae" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/YcaDdMLY17DYvS9ZsH3RHHHsrK8tE90E-8QkJlnt1aGDebNGQeq_PP7vQ2C_.png" alt="3 PuroReggae" title="PuroReggae"></a></li>
+<li><a href="https://play.google.com/store/apps/details?id=com.dotwdg.electroxd" title="ElectroXD" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/WhUeP4y-eH-8tADcsC21QT2Y-zNC04oRufNQUCXGhRIezAg2zMYjp9liIwus.png" alt="4 ElectroXD" title="ElectroXD"></a></li>
+
+	</ul>
+
+<h3>. Social Networks</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.facebook.com/ronnyml">Facebook</a></li>
+<li><a href="https://instagram.com/ronny_ml/" target="_blank">Instagram</a></li>
+<li><a href="http://twitter.com/ronnyml">Twitter</a></li>
+
+	</ul>
+
+<h3>Free and Open Source Software</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.kde.org/" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/kde_logo.jpg" alt="0 KDE"></a></li>
+<li><a href="http://www.opensuse.org/" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/open-suse-logo.png" alt="2 openSUSE"></a></li>
+<li><a href="http://www.debian.org/" title="Debian" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/debian-logo.jpg" alt="3 Debian" title="Debian"></a></li>
+<li><a href="http://www.djangoproject.com/" target="_blank"><img src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/django.png" alt="4 Django"></a></li>
+
+	</ul>
+
+<h3>Worth Reading</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://android-developers.blogspot.com/" title="Android Developers Blog" target="_blank">Android Developers Blog</a></li>
+<li><a href="http://www.codinghorror.com/blog/" title="Coding Horror">Coding Horror</a></li>
+<li><a href="http://www.joelonsoftware.com/" title="Joel on Software" target="_blank">Joel on Software</a></li>
+<li><a href="http://www.paulgraham.com/articles.html" title="Paul Graham" target="_blank">Paul Graham</a></li>
+<li><a href="http://pydanny.com/" title="PyDanny" target="_blank">PyDanny</a></li>
+<li><a href="http://www.xda-developers.com/" title="XDA Developers" target="_blank">XDA Developers</a></li>
+
+	</ul>
+
+<h3><a href="http://twitter.com/ronnyml">Twitter</a></h3><ul class="tweets">
+			<li>
+				Thank you @<a href="http://twitter.com/twitter">twitter</a> for such a great platform of information and freedom <a href="http://twitter.com/search?q=%23LoveTwitter">#LoveTwitter</a>  <a href="https://twitter.com/twitter/status/711658625924620288"> twitter.com/twitter/status…</a> 				<a href="http://twitter.com/ronnyml/statuses/712069616919572480" class="timesince">1&nbsp;week&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				@<a href="http://twitter.com/breno">breno</a> asu han pasado 5 años 
+desde ese post. Gracias por compartir, buena idea hacer la versión 2016,
+ espero salga antes de fin de mes. <a href="http://twitter.com/search?q=%23PPK">#PPK</a> 				<a href="http://twitter.com/ronnyml/statuses/709670446799712256" class="timesince">2&nbsp;weeks&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				Beautiful video. Biking and nature. <a href="http://buff.ly/1pbsEig"> buff.ly/1pbsEig</a> <a href="https://t.co/PXesBwkxoq" rel="nofollow">https://t.co/PXesBwkxoq</a> 				<a href="http://twitter.com/ronnyml/statuses/708048140428042246" class="timesince">3&nbsp;weeks&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				Google’s AI Wins Pivotal Second Game In Match With Go Grandmaster <a href="http://buff.ly/1QHeUoU"> buff.ly/1QHeUoU</a> via @<a href="http://twitter.com/wired">wired</a> <a href="https://t.co/p1hTq84RYp" rel="nofollow">https://t.co/p1hTq84RYp</a> 				<a href="http://twitter.com/ronnyml/statuses/707987780287250433" class="timesince">3&nbsp;weeks&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				just finished a Runtastic run of 10.1 km in 56m 48s with <a href="http://twitter.com/search?q=%23Runtastic">#Runtastic</a> app: <a href="https://www.runtastic.com/sport-sessions/1161023784"> runtastic.com/sport-sessions…</a> 				<a href="http://twitter.com/ronnyml/statuses/704531279086227456" class="timesince">1&nbsp;month&nbsp;ago</a>
+			</li>
+
+			</ul><a href="http://twitter.com/ronnyml" class="twitter-follow-button" data-show-count="false" data-link-color="#004276" data-text-color="#1c1c1c">Follow @ronnyml</a>				<h3>Recent Posts</h3>		<ul>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2016/01/04/the-progress-principle-and-the-power-of-small-wins/">The Progress Principle and the Power of Small&nbsp;Wins</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2015/09/03/mountain-biking-maukallaqta-puma-orqo/">Mountain Biking: Maukallaqta – Puma&nbsp;Orq’o</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2015/05/12/codigo-de-conducta-de-la-comunidad-kde/">Código de Conducta de la comunidad&nbsp;KDE</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2015/03/30/mountain-biking-laguna-de-huaypo-huarocondo-izcuchaca/">Mountain Biking: Laguna de Huaypo -&gt; Huarocondo -&gt;&nbsp;Izcuchaca</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2015/01/27/mountain-biking-pikillaqta-laguna-de-huacarpay-lucre/">Mountain Biking: Pikillaqta -&gt; Laguna de Huacarpay -&gt;&nbsp;Lucre</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2014/09/26/the-kde-lakademy-2014-experience-sao-paulo-brazil/">The KDE LaKademy 2014 experience – São Paulo,&nbsp;Brazil.</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2014/09/26/sao-paulo-brasil/">São Paulo –&nbsp;Brasil.</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2014/08/21/kde-connect-connecting-your-devices-to-kde/">KDE Connect: Connecting your devices to&nbsp;KDE</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2014/08/18/mountain-biking-izcuchaca-killarumiyoq-limatambo/">Mountain Biking: Izcuchaca -&gt; Killarumiyoq -&gt;&nbsp;Limatambo</a>
+						</li>
+					<li>
+				<a href="https://ronnyml.wordpress.com/2014/08/01/lakademy-2014-kde-america-latina/">Lakademy 2014 – KDE América&nbsp;Latina</a>
+						</li>
+				</ul>
+				<h3>Recent Comments</h3>				<ul id="recentcomments">
+											<li class="recentcomments">
+							Javier Burgos on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2344">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+												<li class="recentcomments">
+							Ronny Yabar on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2340">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+												<li class="recentcomments">
+							Ronny Yabar on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2339">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+												<li class="recentcomments">
+							Jaime Soldi on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2338">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+												<li class="recentcomments">
+							Sok on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2335">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+												<li class="recentcomments">
+							jose rodriguez on <a href="https://ronnyml.wordpress.com/2009/07/04/listas-enlazadas-clase-lista-en-c/#comment-2323">Listas enlazadas – Clase Lista,Nodo en&nbsp;c++</a>						</li>
+
+												<li class="recentcomments">
+							<a href="https://www.facebook.com/app_scoped_user_id/1651482178439664/" rel="external nofollow" class="url">Giancarlo Tupac Gutierrez</a> on <a href="https://ronnyml.wordpress.com/2009/07/04/vectores-matrices-y-punteros-en-c/#comment-2236">Vectores, Matrices y Punteros en&nbsp;c++</a>						</li>
+
+												<li class="recentcomments">
+							Ronny Yabar Aizcorbe on <a href="https://ronnyml.wordpress.com/2010/07/24/la-importancia-de-aprender-ingles/#comment-2182">La importancia de aprender&nbsp;Inglés</a>						</li>
+
+												<li class="recentcomments">
+							<a href="http://ionsyncom.wordpress.com/" rel="external nofollow" class="url">ionsyncom</a> on <a href="https://ronnyml.wordpress.com/2010/07/24/la-importancia-de-aprender-ingles/#comment-2181">La importancia de aprender&nbsp;Inglés</a>						</li>
+
+												<li class="recentcomments">
+							Ronny Yabar Aizcorbe on <a href="https://ronnyml.wordpress.com/2009/07/19/quicksort-en-c/#comment-2179">Quicksort en C++</a>						</li>
+
+												<li class="recentcomments">
+							<a href="http://gravatar.com/dmoisset" rel="external nofollow" class="url">Daniel Moisset</a> on <a href="https://ronnyml.wordpress.com/2009/07/19/quicksort-en-c/#comment-2178">Quicksort en C++</a>						</li>
+
+												<li class="recentcomments">
+							Ronny Yabar Aizcorbe on <a href="https://ronnyml.wordpress.com/2009/07/19/quicksort-en-c/#comment-2177">Quicksort en C++</a>						</li>
+
+												<li class="recentcomments">
+							<a href="http://gravatar.com/dmoisset" rel="external nofollow" class="url">Daniel Moisset</a> on <a href="https://ronnyml.wordpress.com/2009/07/19/quicksort-en-c/#comment-2175">Quicksort en C++</a>						</li>
+
+												<li class="recentcomments">
+							Zteven on <a href="https://ronnyml.wordpress.com/2009/07/04/vectores-matrices-y-punteros-en-c/#comment-2162">Vectores, Matrices y Punteros en&nbsp;c++</a>						</li>
+
+												<li class="recentcomments">
+							lalo on <a href="https://ronnyml.wordpress.com/2011/03/14/la-importancia-de-ppk-para-el-peru/#comment-2161">La importancia de PPK para el&nbsp;Perú</a>						</li>
+
+										</ul>
+				<h3>Blog Stats</h3>		<ul>
+			<li>948,884 hits</li>
+		</ul>
+		<h3>Archives</h3>		<ul>
+			<li><a href="https://ronnyml.wordpress.com/2016/01/">January 2016</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2015/09/">September 2015</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2015/05/">May 2015</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2015/03/">March 2015</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2015/01/">January 2015</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/09/">September 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/08/">August 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/07/">July 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/05/">May 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/03/">March 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/02/">February 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2014/01/">January 2014</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/12/">December 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/10/">October 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/09/">September 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/08/">August 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/07/">July 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/05/">May 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/04/">April 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/03/">March 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/02/">February 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2013/01/">January 2013</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/12/">December 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/09/">September 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/07/">July 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/05/">May 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/04/">April 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2012/02/">February 2012</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/12/">December 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/11/">November 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/10/">October 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/09/">September 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/08/">August 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/06/">June 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/05/">May 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2011/03/">March 2011</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/11/">November 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/08/">August 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/07/">July 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/05/">May 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/04/">April 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/03/">March 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/02/">February 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2010/01/">January 2010</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/12/">December 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/10/">October 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/08/">August 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/07/">July 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/05/">May 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/04/">April 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/03/">March 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2009/02/">February 2009</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/11/">November 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/10/">October 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/08/">August 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/07/">July 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/05/">May 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2008/04/">April 2008</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/12/">December 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/11/">November 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/05/">May 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/04/">April 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/03/">March 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2007/01/">January 2007</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/12/">December 2006</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/11/">November 2006</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/10/">October 2006</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/09/">September 2006</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/08/">August 2006</a></li>
+	<li><a href="https://ronnyml.wordpress.com/2006/06/">June 2006</a></li>
+		</ul>
+		<h3><a class="rsswidget" href="https://ronnyml.wordpress.com/feed/" title="Syndicate this content"><img style="background: orange; color: white; border: none;" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/rss.png" alt="RSS" height="14" width="14"></a> <a class="rsswidget" href="https://ronnyml.wordpress.com/" title="La paz interior comienza en el momento en el que decides no permitir, que ninguna persona o evento, tome el control de tus emociones.">RSS</a></h3><ul><li><a class="rsswidget" href="https://ronnyml.wordpress.com/2016/01/04/the-progress-principle-and-the-power-of-small-wins/" title="I recently finished reading “The Progress Principle” by&nbsp;Teresa Amabile and Steven Kramer. I LOVE the book and it had a big impact on my life. For nearly 15 years, the authors have studied&nbsp;the psychological experiences and the performance of people doing complex work inside organizations and they had discovered the progress principle. “Of all the […] […]">The Progress Principle and the Power of Small Wins</a></li></ul><h3>Pages</h3>		<ul>
+			<li class="page_item page-item-51"><a href="https://ronnyml.wordpress.com/contact/">Contact</a></li>
+		</ul>
+		
+
+</div>
+
+</div>
+
+<div id="footer">
+	<p><a href="https://wordpress.com/?ref=footer_website">Create a free website or blog at WordPress.com.</a> <a href="https://wordpress.com/themes/journalist/" title="Learn more about this theme">The Journalist v1.9 Theme</a>.</p>
+</div>
+<!-- wpcom_wp_footer -->
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	<div class="grofile-hash-map-9e820aecf598851efa728f4f0e0abb34">
+	</div>
+	<div class="grofile-hash-map-16a4908aee7a5d75d8f4762ae82cc7da">
+	</div>
+	<div class="grofile-hash-map-aaceed6a497e6997f341daacc6c594df">
+	</div>
+	<div class="grofile-hash-map-6f2d9433789abca458bf13072218b505">
+	</div>
+	<div class="grofile-hash-map-e63c98a1b11f9b1842b9a31fd27b4e71">
+	</div>
+	<div class="grofile-hash-map-baa55f594f9179f015bbd920fce29f98">
+	</div>
+	<div class="grofile-hash-map-06682a00f7dc27797fb998bd68910a80">
+	</div>
+	<div class="grofile-hash-map-5bcbe3ffc314836cdb43a11ee0e460ad">
+	</div>
+	<div class="grofile-hash-map-ec63f62821acc94c466005aa3fc42070">
+	</div>
+	<div class="grofile-hash-map-eb62bb35721d82cb7cc6e7b5fa40dd68">
+	</div>
+	<div class="grofile-hash-map-9fd33a563515f9665dca5194302cd363">
+	</div>
+	<div class="grofile-hash-map-374b7d4904e14202f344ee0c8a3cd7dc">
+	</div>
+	<div class="grofile-hash-map-80d2ad4ad0fd06025bdd2c30c32b585a">
+	</div>
+	<div class="grofile-hash-map-70ff58bdb645a54e04ca0381eb13fdc1">
+	</div>
+	<div class="grofile-hash-map-31839eb98d3e04dda5b9aec0c66cd485">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/ronnyml.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/ronnyml.wordpress.com\/wp-login.php?action=logout&_wpnonce=83146fbe3c","homeURL":"https:\/\/ronnyml.wordpress.com\/","postID":"75","gravDefault":"gravatar_default","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"","userIsLoggedIn":"","isJetpack":"0","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a_003"></script>
+
+	<div id="bit" class="loggedout-follow-normal">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “Imaginemos un mundo libre”</label></h3>
+
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 25 other followers</p>
+			<p><input name="email" placeholder="Enter your email address" id="loggedout-follow-field" type="email"></p>
+
+			<input name="action" value="subscribe" type="hidden">
+			<input name="blog_id" value="1408733" type="hidden">
+			<input name="source" value="https://ronnyml.wordpress.com/2007/12/06/listas-en-haskell/" type="hidden">
+			<input name="sub-type" value="loggedout-follow" type="hidden">
+
+			<input id="_wpnonce" name="_wpnonce" value="72649547f5" type="hidden"><input name="_wp_http_referer" value="/2007/12/06/listas-en-haskell/" type="hidden">
+			<p id="bsub-subscribe-button"><input value="Sign me up" type="submit"></p>
+			</form>
+					<div id="bsub-credit"><a href="https://wordpress.com/?ref=lof">Build a website with WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/widgets.js"></script>
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/form.js"></script>
+<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/a_002"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "ronnyml.wordpress.com";
+	</script>
+	<script type="text/javascript" src="Listas%20en%20Haskell%20%7C%20Imaginemos%20un%20mundo%20libre_archivos/725X1342.js"></script><script id="twitter-csp-test">__twttr.verifyCSP(false);</script></body></html>

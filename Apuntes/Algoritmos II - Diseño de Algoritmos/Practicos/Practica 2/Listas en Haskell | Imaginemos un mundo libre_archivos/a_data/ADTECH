@@ -1,0 +1,16 @@
+document.write("<scr"+"ipt type='text/javascript' src='https://www.googletagservices.com/tag/js/gpt.js'>\n");
+document.write("googletag.pubads().definePassback('/9240792/house_mrec', [300, 250]).display();\n");
+document.write("</scr"+"ipt>\n");
+
+
+document.write('<img src="https://atpixelus.alephd.com/post_adtech?xH3z8opNzJvJ6rtndTDAjCF-nK18PSlu4ycpBzErLGGb6dv2kd6xzg78lGQbbbzYrA2e6cJDEulRIoE9-oN0KFQkdh3gsuGNvV5WnYoFRiVL.ChY13QkcSpdkwxyqBMnJiy8AEHTwQOv3MiPj4f-CvR8oHhVBx-ybTWh57PCzPvFegJ84lQ09UmnD1XI.e9yQt0BLc.p8FdbzD.Hja8-nvbUueDVnNUna4Gp0mybT80md3iJsIMMdHrvBNoaYTjV" width="1" height="1"  style="display:none;">');
+document.write('<img src="https://p.rfihub.com/cm?in=1&pub=758&forward=https://ums.adtechus.com/mapuser?providerid=1014;userid={userid}" width="1" height="1" style="display:none;">');
+document.write('<img src="https://c1.adform.net/serving/cookie/match/?CC=1&party=15&curl=https://ums.adtechus.com/mapuser?providerid=1016;userid=$UID" width="1" height="1" style="display:none;">');
+document.write('<img src="https://ib.adnxs.com/getuid?https://ums.adtechus.com/mapuser?providerid=1001;userid=$UID" width="1" height="1" style="display:none;">');
+document.write('<img src="https://adt.pxl.ace.advertising.com/cfcm.ashx?providerId=1010&extMatch=1&rcode=1" width="1" height="1" style="display:none;">');
+document.write('<img src="https://pixel.sitescout.com/dmp/pixelSync?network=AdTech%20Marketplace&rurl=https://ums.adtechus.com/mapuser?providerid=1002;userid=$UID" width="1" height="1" style="display:none;">');
+document.write('<img src="https://idpix.media6degrees.com/orbserv/hbpix?pixId=15194&pcv=50" width="1" height="1" style="display:none;">');
+document.write('<img src="https://x.bidswitch.net/sync?ssp=aol" width="1" height="1" style="display:none;">');
+document.write('<img src="https://s.chango.com/m/aol" width="1" height="1" style="display:none;">');
+document.write('<img src="https://cm.g.doubleclick.net/pixel?google_nid=adtech_dbm&google_cm&google_sc" width="1" height="1" style="display:none;">');
+document.write('<iframe src="https://ssum-sec.casalemedia.com/usermatch?s=175407&cb=https%3A%2F%2Fums.adtechus.com%2Fmapuser%3Fproviderid%3D1010%3Buserid=" width="1" height="1" style="display: none"></iframe>');
