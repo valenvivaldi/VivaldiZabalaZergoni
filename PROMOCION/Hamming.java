@@ -9,10 +9,9 @@ public class Hamming {
 		Scanner en=new Scanner(System.in);
 		System.out.println("Cual sera el numero k ?");
 		k=en.nextInt();
-		System.out.println(k);
+
 		System.out.println("De que largo seran las palabras ??");
 		largocadenas=en.nextInt();
-		System.out.println(largocadenas);
 		int[] arreglo= new int[largocadenas];
 		Arrays.fill(arreglo, 0);
 		System.out.println("Vamos a cargar las palabras");
@@ -35,8 +34,8 @@ public class Hamming {
 			
 		String cadenaresultado = busquedaHamming(arreglo, cadenas, k); 	
 		System.out.println("RESULTADO:");
-		
-		System.out.println(cadenaresultado);
+		if (cadenaresultado.length()==largocadenas){	
+		System.out.println(cadenaresultado);}else{System.out.println("NO EXISTE UNA CADENA QUE SOLUCIONE EL PROBLEMA");}
 			
 			
 			
