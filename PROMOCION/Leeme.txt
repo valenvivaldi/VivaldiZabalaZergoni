@@ -1,0 +1,7 @@
+Integrantes del trabajo: 
+Joaquin Zabala
+Bruno Zergoni
+Valentin Vivaldi
+
+Ejercicio 1: ejecutar el archivo Hamming.java
+Ejercicio 2 : ejecutar el archivo Fixture.java
