@@ -1,4 +1,4 @@
-﻿CREATE SCHEMA ciudad_de_los_niños;
+CREATE SCHEMA ciudad_de_los_niños;
 
 set search_path = ciudad_de_los_niños;
 
@@ -58,8 +58,8 @@ Constraint pk_Programa  primary key (Nombre_Programa)
 );
 
 Create table Medio_de_pago (
-Id  serial ,
-Constraint pk_Medio_de_pago  primary key (Id)
+id serial ,
+Constraint pk_Medio_de_pago  primary key (id)
 
 );
 
@@ -150,10 +150,31 @@ create trigger TriggerAuditoria after delete on ciudad_de_los_niños.Donante for
 
 --ACA ESTA TODO EN ORDEN, AHORA HAY QUE INSERTAR DATOSSSSS
 
+--Agregar persona
+insert into ciudad_de_los_niños.persona values (dni,'N_y_Ap');
 
-insert into ciudad_de_los_niños.persona values (222222,'piojo zc');
-insert into ciudad_de_los_niños.padrino values (222222,'piojo zc@ñoca','4444434','la pesada siempre viva','123456',null,111);
-insert into ciudad_de_los_niños.donante values (222222,'piojo','12312323');
-delete from ciudad_de_los_niños.donante where dni='222222';
+--Agregar donante
+insert into ciudad_de_los_niños.padrino values (dni,'email','telfijo','direccion','celu','fechanac',cod_postal);
+insert into ciudad_de_los_niños.donante values (222222,'ocupacion','cuil_cuit');
+--Agregar contacto
+insert into ciudad_de_los_niños.padrino values (dni,'email','telfijo','direccion','celu','fechanac',cod_postal);
 
+insert into ciudad_de_los_niños.contacto values (222222,'fecha_primer_contacto','fecha_alta','fecha_baja','fecha_rechazo_adhesion',estado,Dni_recomendador,'comentario',relacion);
 
+--Crear tipotarjeta
+insert into ciudad_de_los_niños.TipoTarjeta values (nombre_tarjeta);
+
+--Crear tarjeta
+insert into ciudad_de_los_niños.Medio_de_pago values (default);
+
+insert into ciudad_de_los_niños.Tarjeta values (lastval(),nro,'nombre_titular','fecha_vencimiento',nombre_tarjeta,Codigo_verificacion);
+
+--Crear debito
+insert into ciudad_de_los_niños.Medio_de_pago values (default);
+insert into ciudad_de_los_niños.Debito values (lastval(),nro_cuenta,'cbu','nombre_titular',Codigo_verificacion,tipo_cuenta,nombre_banco,sucursal_banco);
+
+--creamos programa
+insert into ciudad_de_los_niños.programa values ('nombre_programa','Descripcion');
+
+--insertamos la relacion aporta
+insert into ciudad_de_los_niños.Aporta values (dni,nombre_programa,monto,Frecuencia,lastval());
