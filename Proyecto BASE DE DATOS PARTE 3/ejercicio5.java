@@ -15,11 +15,22 @@ public class ejercicio5 {
 
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, username, password);
-		
 		int opcion=1;
-		
+		boolean salir=true;
+		while(salir){
+			System.out.println("QUE DESEA HACER?? \n 1- INSERTAR UN DONANTE. \n 2- ELIMINAR UN DONANTE \n3-LISTAR DONANTES ");
+			if(opcion==1){insertarDonante(connection);}
+			if(opcion==2){eliminarDonante(connection);}
+			if(opcion==3){listarDonantes(connection);}
+			salir=false;
 
-		if(opcion==1){insertarDonante(connection);}
+		}
+			
+
+
+
+
+
 
 		 } catch(ClassNotFoundException cnfe) {
 	      System.err.println("Error loading driver: " + cnfe);
@@ -116,7 +127,7 @@ public class ejercicio5 {
 		     	String direccion=sc.nextLine();
 			    System.out.println("Ingrese el celular");
 		      	String celular=sc.nextLine();
-			    System.out.println("Ingrese la fecha de nacimiento (Formato dd-mm-aaaa)");
+			    System.out.println("Ingrese la fecha de nacimiento ");
 			    Date fecha_nac = cargarFecha();
 			    System.out.println("Ingrese el codigo postal");
 			    int cod_postal=sc.nextInt();
@@ -199,47 +210,47 @@ public class ejercicio5 {
 				Scanner sc = new Scanner(System.in);
 				System.out.println("ingrese el numero de la tarjeta");
 				String nro_tarjeta = sc.nextLine();
-				String query = "select (nro) from ciudad_de_los_niños.Tarjeta where (nro='"+nro_tarjeta+"') ";
+				String query = "select * from ciudad_de_los_niños.Tarjeta where (nro='"+nro_tarjeta+"') ";
 
 	    		Statement statement = connection.createStatement();
 	    		ResultSet resultSet = statement.executeQuery(query);
-	    	if (!(resultSet.next())){
-				 System.out.println("la tarjeta no esta cargado en la base de datos!");
-				 System.out.println("ingrese el nombre del titula de la tarjeta");
-				 String nombre_titular=sc.nextLine();
+		    	if (!(resultSet.next())){
+					 System.out.println("la tarjeta no esta cargado en la base de datos!");
+					 System.out.println("ingrese el nombre del titula de la tarjeta");
+					 String nombre_titular=sc.nextLine();
 
-				 System.out.println("Ingrese la fecha de vencimiento (Formato dd-mm-aaaa)");
-				 Date fecha_vencimiento=cargarFecha();
-			    
+					 System.out.println("Ingrese la fecha de vencimiento (Formato dd-mm-aaaa)");
+					 Date fecha_vencimiento=cargarFecha();
+				    
 
-				 
-				 String nombre_tarjeta=cargarTipoTarjeta(connection);
-				 
-				 System.out.println("ingrese el codigo de verificacion de la tarjeta");
-				 int codigo_verificacion=sc.nextInt();
-				
-				 query = "insert into ciudad_de_los_niños.medio_de_pago (id) values(default)";
-				 PreparedStatement statement1 = connection.prepareStatement(query);
-				 statement1.executeUpdate();
+					 
+					 String nombre_tarjeta=cargarTipoTarjeta(connection);
+					 
+					 System.out.println("ingrese el codigo de verificacion de la tarjeta");
+					 int codigo_verificacion=sc.nextInt();
+					
+					 query = "insert into ciudad_de_los_niños.medio_de_pago (id) values(default)";
+					 PreparedStatement statement1 = connection.prepareStatement(query);
+					 statement1.executeUpdate();
 
-			     query = "insert into ciudad_de_los_niños.tarjeta (id,nro,nombre_titular,fecha_vencimiento,nombre_tarjeta,codigo_verificacion) values(lastval(),?,?,?,?,?)";
-				 statement1= connection.prepareStatement(query);
-				 
-				 statement1.setString(1,nro_tarjeta);
-				 statement1.setString(2,nombre_titular);
-				 statement1.setDate(3,fecha_vencimiento);
-				 statement1.setString(4,nombre_tarjeta);
-				 statement1.setInt(5,codigo_verificacion);
-				 statement1.executeUpdate();
-				 query = "select * from ciudad_de_los_niños.tarjeta where (nro='"+nro_tarjeta+"') ";
-				 statement = connection.createStatement();
-				 resultSet = statement.executeQuery(query);
-	     	 	resultSet.next();
-	     	 	return resultSet.getInt("id");
-	     	 }else{
-	     	 	return resultSet.getInt("id");
+				     query = "insert into ciudad_de_los_niños.tarjeta (id,nro,nombre_titular,fecha_vencimiento,nombre_tarjeta,codigo_verificacion) values(lastval(),?,?,?,?,?)";
+					 statement1= connection.prepareStatement(query);
+					 
+					 statement1.setString(1,nro_tarjeta);
+					 statement1.setString(2,nombre_titular);
+					 statement1.setDate(3,fecha_vencimiento);
+					 statement1.setString(4,nombre_tarjeta);
+					 statement1.setInt(5,codigo_verificacion);
+					 statement1.executeUpdate();
+					 query = "select * from ciudad_de_los_niños.tarjeta where (nro='"+nro_tarjeta+"');";
+					 statement = connection.createStatement();
+					 resultSet = statement.executeQuery(query);
+		     	 	resultSet.next();
+		     	 	return resultSet.getInt("id");
+		     	 }else{
+		     	 	return resultSet.getInt("id");
 
-	     	 }	
+		     	 }	
 		     
 		     	 
 			}catch(SQLException sqle) {
@@ -254,37 +265,45 @@ public static int cargarDebito(Connection connection)throws SQLException{
 				Scanner sc = new Scanner(System.in);
 				System.out.println("ingrese el CBU");
 				String cbu = sc.nextLine();
-				String query = "select (CBU) from ciudad_de_los_niños.Debito where (CBU='"+cbu+"') ";
+				String query = "select * from ciudad_de_los_niños.Debito where (CBU='"+cbu+"') ";
 
 	    		Statement statement = connection.createStatement();
 	    		ResultSet resultSet = statement.executeQuery(query);
 		    	if (!(resultSet.next())){
 					 System.out.println(" la cuenta de debito no esta cargado en la base de datos!");
+					
+
+
 					 System.out.println("ingrese el numero de cuenta");
 					 int nro_cuenta = sc.nextInt();
-					 System.out.println("ingrese el nombre del titular");
 					
+					 sc.nextLine();
+
+
+					 System.out.println("ingrese el nombre del titular");
 					 String nombre_titular=sc.nextLine();
 
 					 
 					 System.out.println("ingrese el codigo de verificacion de la tarjeta");
 					 int codigo_verificacion=sc.nextInt();
+
+					 sc.nextLine();
+
 					 System.out.println("ingrese el tipo de cuenta");
-					
 					 String tipo_cuenta=sc.nextLine();
+					
 					 System.out.println("ingrese el nombre del banco");
-					
-					 String nombre_banco=sc.nextLine();
+					String nombre_banco=sc.nextLine();
+					 
 					 System.out.println("ingrese el nombre de la sucursal");
-					
 					 String sucursal_banco=sc.nextLine();
 
 					 query = "insert into ciudad_de_los_niños.medio_de_pago (id) values(default)";
-					 statement = connection.createStatement();
-					 statement.executeQuery(query);
+					 PreparedStatement statement1 = connection.prepareStatement(query);
+					 statement1.executeUpdate();
 
 				     query = "insert into ciudad_de_los_niños.debito (id,nro_cuenta,cbu,nombre_titular,codigo_verificacion,tipo_cuenta,nombre_banco,sucursal_banco) values(lastval(),?,?,?,?,?,?,?)";
-					 PreparedStatement statement1= connection.prepareStatement(query);
+					 statement1= connection.prepareStatement(query);
 					 statement1.setInt(1,nro_cuenta);
 					 statement1.setString(2,cbu);
 					 statement1.setString(3,nombre_titular);
@@ -293,7 +312,7 @@ public static int cargarDebito(Connection connection)throws SQLException{
 					 statement1.setString(6,nombre_banco);
 					 statement1.setString(7,sucursal_banco);
 					 statement1.executeUpdate();
-					 query = "select (nro) from ciudad_de_los_niños.debito where (cbu='"+cbu+"') ";
+					 query = "select * from ciudad_de_los_niños.debito where (cbu='"+cbu+"') ";
 					 statement = connection.createStatement();
 					 resultSet = statement.executeQuery(query);
 		     	 	resultSet.next();
@@ -349,7 +368,7 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 			Scanner sc = new Scanner(System.in);
 			
 
-			String query = "select * from ciudad_de_los_niños.aporta where (dni='"+dni+"',nombre_programa='"+nombre_programa+"',id="+id+") ";
+			String query = "select * from ciudad_de_los_niños.aporta where (dni='"+dni+"' AND nombre_programa='"+nombre_programa+"' AND id="+id+") ";
 
 	    	Statement statement = connection.createStatement();
 	    	ResultSet resultSet = statement.executeQuery(query);
@@ -359,7 +378,7 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 				 float monto=sc.nextFloat();
 			     
 			     String frecuencia=tipoFrecuencia();
-			     query = "insert into ciudad_de_los_niños.aporte (dni,nombre_programa,monto,frecuencia,id) values(?,?,?,?,?)";
+			     query = "insert into ciudad_de_los_niños.aporta (dni,nombre_programa,monto,frecuencia,id) values(?,?,?,?,?)";
 				 PreparedStatement statement1 = connection.prepareStatement(query);
 				 statement1.setString(1,dni);
 				 statement1.setString(2,nombre_programa);
@@ -422,6 +441,30 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 
 	}
 
+
+	public static void eliminarDonante(Connection connection)throws SQLException{
+		try{
+			Scanner sc = new Scanner(System.in);
+			System.out.println("ingrese dni del donante que desea ELIMINAR");
+			String dni =sc.nextLine();
+
+			String query = "delete from ciudad_de_los_niños.donante where (dni='"+dni+"')";
+
+	    	PreparedStatement statement = connection.prepareStatement(query);
+	    	statement.executeUpdate();
+	    	 
+		}catch(SQLException sqle) {
+    		sqle.printStackTrace();
+      		System.err.println("Error connecting: " + sqle);
+    	 	throw sqle;
+    	 }
+
+	}
+
+
+
+
+
 	public static Date cargarFecha(){
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Ingrese el DIA:");
@@ -430,7 +473,7 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 		int mes = sc.nextInt();
 		System.out.println("Ingrese el AÑO:");
 		int año = sc.nextInt();
-		Date fecha = new Date (año,mes,dia);
+		Date fecha = new Date ((año-1900),(mes-1),dia);
 		return fecha;
 
 
