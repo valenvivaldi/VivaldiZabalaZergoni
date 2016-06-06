@@ -331,7 +331,7 @@ public static int cargarDebito(Connection connection)throws SQLException{
 
 		}
 
-public static String cargarTipoTarjeta(Connection connection)throws SQLException{
+	public static String cargarTipoTarjeta(Connection connection)throws SQLException{
 			try{
 				Scanner sc = new Scanner(System.in);
 				System.out.println("ingrese el nombre de la tarjeta");
@@ -437,9 +437,9 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
     		sqle.printStackTrace();
       		System.err.println("Error connecting: " + sqle);
     	 	throw sqle;
-    	 }
+    		 }
 
-	}
+		}
 
 
 	public static void eliminarDonante(Connection connection)throws SQLException{
@@ -462,7 +462,31 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 	}
 
 
+	public static String listarDonantes(Connection connection)throws SQLException{
+		try{
+			
+			String query = "select dni,n_y_ap,nombre_programa,monto,frecuencia from ciudad_de_los_niños.persona natural join ciudad_de_los_niños.aporta ";
 
+	    	Statement statement = connection.createStatement();
+	    	ResultSet resultSet = statement.executeQuery(query);
+	    	if (!(resultSet.next())){
+				 System.out.println("el programa no esta cargado en la base de datos!");
+				System.out.println("ingrese la descripcion del programa");
+				 String descripcion=sc.nextLine();
+			     query = "insert into ciudad_de_los_niños.programa (nombre_programa,descripcion) values(?,?)";
+				 PreparedStatement statement1 = connection.prepareStatement(query);
+				 statement1.setString(1,nombre_programa);
+				 statement1.setString(2,descripcion);
+				 statement1.executeUpdate();
+	     	 }
+	     	return nombre_programa; 
+		}catch(SQLException sqle) {
+    		sqle.printStackTrace();
+      		System.err.println("Error connecting: " + sqle);
+    	 	throw sqle;
+    		 }
+
+		}
 
 
 	public static Date cargarFecha(){
@@ -479,6 +503,15 @@ public static String cargarTipoTarjeta(Connection connection)throws SQLException
 
 
 	}
+
+
+
+
+
+
+
+
+
 
 
 
