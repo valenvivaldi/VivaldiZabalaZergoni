@@ -15,14 +15,17 @@ public class ejercicio5 {
 
 		Class.forName(driver);
 		Connection connection = DriverManager.getConnection(url, username, password);
-		int opcion=1;
+		int opcion;
 		boolean salir=true;
+		Scanner sc = new Scanner(System.in);
 		while(salir){
-			System.out.println("QUE DESEA HACER?? \n 1- INSERTAR UN DONANTE. \n 2- ELIMINAR UN DONANTE \n3-LISTAR DONANTES ");
+			System.out.println("QUE DESEA HACER?? \n 1- INSERTAR UN DONANTE. \n 2- ELIMINAR UN DONANTE \n 3-LISTAR DONANTES \n 4- salir");
+			opcion=sc.nextInt();
 			if(opcion==1){insertarDonante(connection);}
 			if(opcion==2){eliminarDonante(connection);}
 			if(opcion==3){listarDonantes(connection);}
-			salir=false;
+			if(opcion==4){salir=false;}
+			
 
 		}
 			
@@ -462,24 +465,33 @@ public static int cargarDebito(Connection connection)throws SQLException{
 	}
 
 
-	public static String listarDonantes(Connection connection)throws SQLException{
+	public static void listarDonantes(Connection connection)throws SQLException{
 		try{
 			
-			String query = "select dni,n_y_ap,nombre_programa,monto,frecuencia from ciudad_de_los_niños.persona natural join ciudad_de_los_niños.aporta ";
+			String query = "select dni,n_y_ap,nombre_programa,monto,frecuencia from ciudad_de_los_niños.persona natural join ciudad_de_los_niños.aporta";
 
 	    	Statement statement = connection.createStatement();
 	    	ResultSet resultSet = statement.executeQuery(query);
-	    	if (!(resultSet.next())){
-				 System.out.println("el programa no esta cargado en la base de datos!");
-				System.out.println("ingrese la descripcion del programa");
-				 String descripcion=sc.nextLine();
-			     query = "insert into ciudad_de_los_niños.programa (nombre_programa,descripcion) values(?,?)";
-				 PreparedStatement statement1 = connection.prepareStatement(query);
-				 statement1.setString(1,nombre_programa);
-				 statement1.setString(2,descripcion);
-				 statement1.executeUpdate();
+	    	
+			System.out.println("\n \n \n ");
+	    	while((resultSet.next())){
+				String dni= resultSet.getString("dni");
+				String nombre= resultSet.getString("n_y_ap");
+				String nom_prog= resultSet.getString("nombre_programa");
+				float monto= resultSet.getFloat("monto");
+				String frecuencia = resultSet.getString("frecuencia");
+
+				System.out.println("DNI: "+dni);
+				System.out.println("Nombre y apellido: "+nombre);
+				System.out.println("Programa al que aporta: "+nom_prog);
+				System.out.println("Monto: "+monto);
+				System.out.println("Freciencia: "+frecuencia);
+				System.out.println("------------------------------------------------------------");
+
+
+
 	     	 }
-	     	return nombre_programa; 
+	     	 
 		}catch(SQLException sqle) {
     		sqle.printStackTrace();
       		System.err.println("Error connecting: " + sqle);
