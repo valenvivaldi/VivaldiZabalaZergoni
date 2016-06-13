@@ -533,25 +533,7 @@ public static int cargarDebito(Connection connection)throws SQLException{
 
 
 
-/*try{
 
-
-
-
-
-
-
-
-
-
-		}catch(SQLException sqle) {
-    		sqle.printStackTrace();
-      		System.err.println("Error connecting: " + sqle);
-    	};
-
-
-
-*/
 
 
 
