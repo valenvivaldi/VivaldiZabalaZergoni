@@ -76,3 +76,9 @@ insert into ciudad_de_los_niños.programa values ('Alimentacion','Programa para 
 
 --insertamos la relacion aporta
 insert into ciudad_de_los_niños.Aporta values (11222333,'Alimentacion',2000,'Mensual',lastval());
+
+insert into ciudad_de_los_niños.Aporta values (11222333,'Campamento y Recreacion',1000,'Mensual',lastval());
+
+insert into ciudad_de_los_niños.Aporta values (11222333,'VIDA',200,'Mensual',lastval());
+
+
