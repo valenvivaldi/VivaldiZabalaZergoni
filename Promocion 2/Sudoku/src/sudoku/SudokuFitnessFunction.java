@@ -112,10 +112,10 @@ public class SudokuFitnessFunction extends FitnessFunction {
 		int repFil=cantidadRepeticionesFilas(aux);
 		int repCol=cantidadRepeticionesColumnas(aux);
 		fitness=0;
-		fitness+=810000-(1000*repGlob);
-		fitness+=1000-(100*(repFil));
-		fitness+=1000-(100*(repCol));
-		fitness+=9000-(1000*(repCuad));
+		fitness+=81000-(1000*repGlob);
+		fitness+=50000-(500*(repFil));
+		fitness+=50000-(500*(repCol));
+		fitness+=20000-(1000*(repCuad));
 		
 		
 		return fitness;		
@@ -162,7 +162,7 @@ public class SudokuFitnessFunction extends FitnessFunction {
 				arreglorep[(aux[i][j])-1]+=1;
 			}	
 			for(j=0;j<9;j++){
-				if(arreglorep[i]>1){res+=arreglorep[i]-1;}
+				if(arreglorep[j]>1){res+=arreglorep[j]-1;}
 			}
 		
 		}
