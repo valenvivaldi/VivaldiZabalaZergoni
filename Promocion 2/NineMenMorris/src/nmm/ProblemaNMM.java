@@ -186,7 +186,26 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	
 	
 	private boolean verificarMolino(int i, int[] tabaux, int turno) {
-	
+		if(((i==0)||(i==1)||(i==2))&&(tabaux[0]==turno)&&(tabaux[1]==turno)&&(tabaux[2]==turno)){return true;}
+		if(((i==3)||(i==4)||(i==5))&&(tabaux[3]==turno)&&(tabaux[4]==turno)&&(tabaux[5]==turno)){return true;}
+		if(((i==6)||(i==7)||(i==8))&&(tabaux[6]==turno)&&(tabaux[7]==turno)&&(tabaux[8]==turno)){return true;}
+		if(((i==9)||(i==10)||(i==11))&&(tabaux[9]==turno)&&(tabaux[10]==turno)&&(tabaux[11]==turno)){return true;}
+		
+		if(((i==12)||(i==13)||(i==14))&&(tabaux[12]==turno)&&(tabaux[13]==turno)&&(tabaux[14]==turno)){return true;}
+		if(((i==15)||(i==16)||(i==17))&&(tabaux[15]==turno)&&(tabaux[16]==turno)&&(tabaux[17]==turno)){return true;}
+		if(((i==18)||(i==19)||(i==20))&&(tabaux[18]==turno)&&(tabaux[19]==turno)&&(tabaux[20]==turno)){return true;}
+		if(((i==21)||(i==22)||(i==23))&&(tabaux[21]==turno)&&(tabaux[22]==turno)&&(tabaux[23]==turno)){return true;}
+		
+		if(((i==0)||(i==9)||(i==21))&&(tabaux[0]==turno)&&(tabaux[9]==turno)&&(tabaux[21]==turno)){return true;}
+		if(((i==3)||(i==10)||(i==18))&&(tabaux[3]==turno)&&(tabaux[10]==turno)&&(tabaux[18]==turno)){return true;}
+		if(((i==6)||(i==11)||(i==15))&&(tabaux[6]==turno)&&(tabaux[11]==turno)&&(tabaux[15]==turno)){return true;}
+		if(((i==1)||(i==4)||(i==7))&&(tabaux[1]==turno)&&(tabaux[4]==turno)&&(tabaux[7]==turno)){return true;}
+		
+		if(((i==16)||(i==19)||(i==22))&&(tabaux[16]==turno)&&(tabaux[19]==turno)&&(tabaux[22]==turno)){return true;}
+		if(((i==8)||(i==12)||(i==17))&&(tabaux[8]==turno)&&(tabaux[12]==turno)&&(tabaux[17]==turno)){return true;}
+		if(((i==5)||(i==13)||(i==20))&&(tabaux[5]==turno)&&(tabaux[13]==turno)&&(tabaux[20]==turno)){return true;}
+		if(((i==2)||(i==14)||(i==23))&&(tabaux[2]==turno)&&(tabaux[14]==turno)&&(tabaux[23]==turno)){return true;}
+		
 		return false;
 	}
 	

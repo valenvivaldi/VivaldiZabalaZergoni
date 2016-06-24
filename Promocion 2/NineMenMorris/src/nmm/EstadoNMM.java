@@ -6,8 +6,8 @@ public class EstadoNMM implements AdversarySearchState {
 	private int fichasJ;
 	private int fichasCPU;
 	
-	private boolean max; // true es max si es false es min
-	private int turn; //2 si es la maquina y 1 si es el jugador
+	private boolean max; 	 /*true es max si es false es min*/
+	private int turn; 		/* 2 si es la maquina y 1 si es el jugador*/
 	
 	
 	private String movimientoAplicado;
