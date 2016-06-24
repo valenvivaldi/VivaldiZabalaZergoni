@@ -99,7 +99,7 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	@Override
 	public int minValue() {
 		
-		return 0;
+		return -1000;
 	}
 
 	@Override
