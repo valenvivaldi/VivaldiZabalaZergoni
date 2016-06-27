@@ -3,12 +3,19 @@ package nmm;
 import java.util.List;
 
 import framework.AdversarySearchEngine;
+import framework.AdversarySearchProblem;
+import framework.AdversarySearchState;
 
-public class MinMaxNMM extends AdversarySearchEngine<ProblemaNMM, EstadoNMM>{
-	
+public class MinMaxNMM extends AdversarySearchEngine<ProblemaNMM, EstadoNMM> {
 	
 
-	
+	public MinMaxNMM(ProblemaNMM problema,int prof){
+		super();
+		problem =problema;
+		maxDepth = prof;
+	}
+
+
 	public int computeValue(EstadoNMM state) {
 		
 		return computeValue(state,maxDepth,-1000,1000);

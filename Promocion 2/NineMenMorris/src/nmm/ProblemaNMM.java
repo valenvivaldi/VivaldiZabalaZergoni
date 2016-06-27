@@ -7,7 +7,9 @@ import java.util.List;
 import framework.AdversarySearchProblem;
 
 public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
-
+	public ProblemaNMM(){};
+	
+	
 	@Override
 	public EstadoNMM initialState() {
 		int[] tab=new int[24];
@@ -66,9 +68,46 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	private boolean adyacentes(int i, int j) {
 		
 
+		return (adyac(i,j)||adyac(j,i));
+	}
+
+	private boolean adyac(int i, int j) {
+		if(i==1&&j==0){return true;}
+		if(i==1&&j==2){return true;}
+		if(i==3&&j==4){return true;}
+		if(i==5&&j==4){return true;}
+		if(i==6&&j==7){return true;}
+		if(i==8&&j==7){return true;}
+		if(i==15&&j==16){return true;}
+		if(i==17&&j==16){return true;}
+		if(i==18&&j==19){return true;}
+		if(i==20&&j==19){return true;}
+		if(i==21&&j==22){return true;}
+		if(i==23&&j==22){return true;}
+		if(i==9&&j==10){return true;}
+		if(i==11&&j==10){return true;}
+		if(i==12&&j==13){return true;}
+		if(i==14&&j==13){return true;}
+		if(i==0&&j==9){return true;}
+		if(i==21&&j==9){return true;}
+		if(i==3&&j==10){return true;}
+		if(i==18&&j==10){return true;}
+		if(i==6&&j==11){return true;}
+		if(i==15&&j==11){return true;}
+		if(i==8&&j==12){return true;}
+		if(i==17&&j==12){return true;}
+		if(i==5&&j==13){return true;}
+		if(i==20&&j==13){return true;}
+		if(i==2&&j==14){return true;}
+		if(i==23&&j==14){return true;}
+		if(i==1&&j==4){return true;}
+		if(i==7&&j==4){return true;}
+		if(i==16&&j==19){return true;}
+		if(i==22&&j==19){return true;}
 		return false;
 	}
 
+	
 	@Override
 	public boolean end(EstadoNMM state) {
 		int[] aux=state.getTablero();
@@ -78,66 +117,80 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 			if(aux[i]==1){cantFichasJ++;}
 			if(aux[i]==2){cantFichasCPU++;}
 		}
-		if(cantFichasJ<3||cantFichasCPU<3||(getSuccessors(state)).size()==0){return true;};
+		if((cantFichasJ<3&&state.getFichasJ()==0)||(cantFichasCPU<3&&state.getFichasCPU()==0)||(getSuccessors(state)).size()==0){
+			return true;
+			};
 		return false;
 	}
 
-	@Override
+	
 	public int value(EstadoNMM state) {
+		
 		int[] tabaux= state.getTablero();
+		
 		int cantJ=contarFichas(1,tabaux);
+		
 		int cantCPU=contarFichas(2,tabaux);
+		
 		if(end(state)){
+		
 			if(cantCPU<cantJ){return maxValue();}
 			if(cantCPU>cantJ){return minValue();}
 		}
+		
 		int res = 100 - (cantJ-cantCPU);
 		
 		return res;
 	}
 
-	@Override
-	public int minValue() {
+	
+	public  int minValue() {
 		
 		return -1000;
 	}
 
-	@Override
-	public int maxValue() {
+	
+	public  int maxValue() {
 		
 		return 1000;
 	}
 	
 	private int contarFichas(int j,int[] tab){
 		int res=0;
+		
 		for(int i=0;i<tab.length;i++){
 			if(j==tab[i]){res++;}
 		}
 		return res;
 	}
 	
-	public EstadoNMM insertarFicha(EstadoNMM state,int i){
-		int[] tabaux=new int[24];
-		for(int j=0;j<24;j++){tabaux[j]=state.getTablero()[j];}
-		int turno=state.getTurn();
-		tabaux[i]=turno;
-		EstadoNMM res;
-		if(verificarMolino(i,tabaux,turno)){
-			if(turno==1){
-				res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ()-1,state.getFichasCPU());
-			}else{
-				res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU()-1);
-			}
-			
-		}else{
-			if(turno==1){
-				res = new EstadoNMM(!state.isMax(),2,"se inserto!",tabaux,state.getFichasJ()-1,state.getFichasCPU());
-			}else{
-				res = new EstadoNMM(!state.isMax(),1,"se inserto!",tabaux,state.getFichasJ(),state.getFichasCPU()-1);
-			}
-			
-		}
+	public  EstadoNMM insertarFicha(EstadoNMM state,int i){
 		
+		int[] tabaux=new int[24];
+		for(int j=0;j<24;j++){
+			tabaux[j]=state.getTablero()[j];
+		};
+		EstadoNMM res=state;
+		int turno=state.getTurn();
+		
+		if(tabaux[i]==0){
+			tabaux[i]=turno;
+			if(verificarMolino(i,tabaux,turno)){
+				if(turno==1){
+					res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ()-1,state.getFichasCPU());
+				}else{
+					res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU()-1);
+				}
+				
+			}else{
+				if(turno==1){
+					res = new EstadoNMM(!state.isMax(),2,"se inserto!",tabaux,state.getFichasJ()-1,state.getFichasCPU());
+				}else{
+					res = new EstadoNMM(!state.isMax(),1,"se inserto!",tabaux,state.getFichasJ(),state.getFichasCPU()-1);
+				}
+				
+			}
+		}else{System.out.println("CASILLA OCUPADA POR OTRA FICHA");}
 		
 		return res;
 	}
@@ -185,7 +238,7 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	
 	
 	
-	private boolean verificarMolino(int i, int[] tabaux, int turno) {
+	private static boolean verificarMolino(int i, int[] tabaux, int turno) {
 		if(((i==0)||(i==1)||(i==2))&&(tabaux[0]==turno)&&(tabaux[1]==turno)&&(tabaux[2]==turno)){return true;}
 		if(((i==3)||(i==4)||(i==5))&&(tabaux[3]==turno)&&(tabaux[4]==turno)&&(tabaux[5]==turno)){return true;}
 		if(((i==6)||(i==7)||(i==8))&&(tabaux[6]==turno)&&(tabaux[7]==turno)&&(tabaux[8]==turno)){return true;}

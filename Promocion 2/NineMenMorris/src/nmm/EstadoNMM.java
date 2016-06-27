@@ -18,6 +18,7 @@ public class EstadoNMM implements AdversarySearchState {
 		turn=turnn;
 		movimientoAplicado=mov;
 		tablero=tabl;
+		
 		fichasJ=fichj;
 		fichasCPU=fichcpu;
 	}
@@ -74,6 +75,38 @@ public class EstadoNMM implements AdversarySearchState {
 	}
 	public int getFichasCPU(){
 		return fichasCPU;
+	}
+
+
+
+	public void imprimir() {
+		
+		System.out.println(movimientoAplicado);
+		System.out.println();
+		
+		System.out.println(tablero[0]+"--------"+tablero[1]+"--------"+tablero[2]);
+		System.out.println("|        |        |");
+		
+		System.out.println("|  "+tablero[3]+"-----"+tablero[4]+"-----"+tablero[5]+"  |");
+		System.out.println("|  |     |     |  |");
+
+		System.out.println("|  |  "+tablero[6]+"--"+tablero[7]+"--"+tablero[8]+"  |  |");
+		System.out.println("|  |  |     |  |  |");
+		
+		System.out.println(tablero[9]+"--"+tablero[10]+"--"+tablero[11]+"     "+tablero[12]+"--"+tablero[13]+"--"+tablero[14]);
+		
+		System.out.println("|  |  |     |  |  |");
+		System.out.println("|  |  "+tablero[15]+"--"+tablero[16]+"--"+tablero[17]+"  |  |");
+		System.out.println("|  |     |     |  |");
+		System.out.println("|  "+tablero[18]+"-----"+tablero[19]+"-----"+tablero[20]+"  |");
+		System.out.println("|        |        |");
+		
+		System.out.println(tablero[21]+"--------"+tablero[22]+"--------"+tablero[23]);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
 	}
 	
 
