@@ -5,17 +5,32 @@ package sudoku;
 import org.jgap.FitnessFunction;
 import org.jgap.IChromosome;
 import java.util.*;
+/*la funcion de fitnes almacena la matriz del problema, para poder evaluar los cromosomas
+ * 
+ * para la funcion fitness tenemos en cuentra 4 tipos de errores:
+ * -repGlob: son las repeticiones de cada valor respecto a todo el sudoku, por ej: si hay 10 casillas con un 8,
+ * etonces hay una repeticion global demas del valor 8, pues deberia haber solo 9 apariciones del mismo
+ * -repCol: cantidad de numeros repetidos en columnas
+ * -repFil: idem para filas
+ * -repCuad: repeticiones demas de un elemento en los cuadrantes (cuadrados de 3x3)
+ * 
+ * Casi siempre que queremos trabajar con la posible solucion, lo que hacemos es crear una matriz auxiliar con
+ * los datos de la matriz con espacios vacios y la rellena con los datos del cromosoma a probar
+ * 
+ * 
+ * */
+
 
 public class SudokuFitnessFunction extends FitnessFunction {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private int[][] matriz; 
 	
+	
+	/*controla que la matriz sea una matriz apta para el sudoku*/
 	public SudokuFitnessFunction (int[][] m){
-		if(m.length == 9 && (m[1]).length==9){
+		if(m.length == 9 && (m[0]).length==9&& (m[1]).length==9&& (m[2]).length==9&& (m[3]).length==9&& (m[4]).length==9&& (m[5]).length==9&& (m[6]).length==9&& (m[7]).length==9&& (m[8]).length==9){
 			matriz=m;
 		
 		
@@ -29,6 +44,7 @@ public class SudokuFitnessFunction extends FitnessFunction {
 		
 	}
 	
+	/*devuelve el valor en la posicion i del cromosoma*/
 	public static int getAlelo( IChromosome a_potentialSolution, int a_position ){
 		Integer num =(Integer) a_potentialSolution.getGene(a_position).getAllele();
 
@@ -37,7 +53,7 @@ public class SudokuFitnessFunction extends FitnessFunction {
 	
 	
 	
-	
+	/*indica si el cromosoma es una solucion exitosa al sudoku*/
 	public boolean exito(IChromosome cromosoma){
 		int[][] aux = new int[9][9];
 		int indicecrom =0;
@@ -61,6 +77,8 @@ public class SudokuFitnessFunction extends FitnessFunction {
 		return(repGlob+repCuad+repFil+repCol==0);
 	
 	}
+	
+	/*Esto imprime la cantidad de errores que hay de cada tipo*/
 	public void imprimirRepeticiones(IChromosome cromosoma){
 		int[][] aux = new int[9][9];
 		int indicecrom =0;
@@ -90,7 +108,7 @@ public class SudokuFitnessFunction extends FitnessFunction {
 	
 	}
 	
-	
+	/*evaluamos la solucion, estableciendo prioridades a fin de resolver algunos tipos de errores primero */
 	public double evaluate(IChromosome cromosoma) {
 		double fitness;
 		int[][] aux = new int[9][9];
@@ -115,14 +133,16 @@ public class SudokuFitnessFunction extends FitnessFunction {
 		fitness+=81000-(1000*repGlob);
 		fitness+=50000-(500*(repFil));
 		fitness+=50000-(500*(repCol));
-		fitness+=20000-(1000*(repCuad));
+		fitness+=2000-(200*(repCuad));
 		
 		
 		return fitness;		
 	}
 
 	
-	
+	/*Ahora creamos las funciones encargadas de contabilizar los errores de cada tipo, estos estan aclarados 
+	 * al comienzo del archivo
+	 * */
 	
 	
 	private int cantidadRepeticionesColumnas(int[][] aux) {

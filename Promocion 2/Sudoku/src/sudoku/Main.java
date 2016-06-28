@@ -6,12 +6,22 @@ import org.jgap.impl.IntegerGene;
 //import java.util.*;
 
 public class Main {
+	/* ALGUNOS DETALLES ACERCA DEL MAIN
+	 * Al Comienzo del main se setean variables que modifican el comportamiento del programa
+	 * - la variable cantidadEvoluciones dice el limite de evoluciones que va a hacer el programa antes de
+	 * cortar, la variable nolimit indica si itera sin limite hasta encontrar la solucion correcta o si utiliza
+	 * el limite de evoluciones anterior.
+	 * -cantEvolCheck indica cada cuantas evoluciones se hace un chequeo sobre el mejor de la poblacion e imprime
+	 * la cantidad de errores que posee, ademas si detecta que es una solucion correcta hace que el ciclo corte,
+	 * 
+	 * - abajo definimos varias matricez que usamos de ejemplo, el main trabaja con la variable "matriz" que se 
+	 * encuentra abajo de los ejemplos
+	 * */
 	
 	public static void main(String[] args) throws InvalidConfigurationException {
 		  int cantidadEvoluciones=87000;
-		  
-		  int tamañoPoblacion = 20;
-		  int cantEvolCheck=100;
+		  int tamañoPoblacion = 10000;
+		  int cantEvolCheck=1;
 		  boolean nolimit =true;
 		  
 		  
@@ -70,10 +80,34 @@ public class Main {
 							  {0,0,0,0,0,0,0,0,0},
 							  {0,0,0,0,0,0,0,0,0}};
 
+		  int[][] nivelraul2 = {
+			        {0, 0, 0, 4, 2, 8, 0, 0, 0},
+			        {4, 5, 0, 1, 7, 6, 0, 3, 2},
+			        {0, 8, 0, 3, 9, 5, 0, 4, 1},
+			        {0, 9, 0, 5, 8, 0, 7, 0, 0},
+			        {0, 0, 0, 2, 0, 7, 0, 9, 3},
+			        {7, 2, 0, 9, 0, 0, 5, 6, 0},
+			        {5, 6, 8, 0, 3, 4, 2, 0, 9},
+			        {0, 1, 0, 8, 0, 0, 3, 7, 6},
+			        {0, 0, 0, 0, 1, 0, 4, 8, 0}
+			};
+		  
+		  int[][] nivelraul = {
+			        {0, 0, 6, 4, 2, 8, 0, 0, 0},
+			        {4, 5, 0, 1, 7, 6, 0, 3, 2},
+			        {0, 8, 7, 3, 9, 5, 0, 4, 1},
+			        {0, 9, 3, 5, 8, 0, 7, 0, 0},
+			        {0, 4, 0, 2, 0, 7, 0, 9, 3},
+			        {7, 2, 0, 9, 0, 0, 5, 6, 0},
+			        {5, 6, 8, 0, 3, 4, 2, 0, 9},
+			        {0, 1, 0, 8, 0, 0, 3, 7, 6},
+			        {0, 7, 0, 6, 1, 0, 4, 8, 0}
+			};
 		  
 		  
 		  
-		  int[][]matriz=nivel2;		  
+		  //MATRIZ CON LA QUE SE TRABAJA!!
+		  int[][]matriz=nivel1;		  
 				  
 				  
 		  Configuration conf = new DefaultConfiguration();	  
@@ -142,6 +176,10 @@ public class Main {
 
 	}
 
+	
+	/*Esta funcion cuenta la cantidad de espacios vacios del sudoku, lo que nos permite saber cuantos genes 
+	 * vamos a usar
+	 * */
 	private static int contabilizarVacios(int[][] matriz) {
 		int res=0;
 		for(int i=0;i<9;i++){
@@ -153,6 +191,11 @@ public class Main {
 		return res;
 	}
 
+	
+	
+/*
+ * imprime el sudoku rellenando los espacios vacios con los datos del cromosoma
+ * */
 	public static void imprimirPosibleSolucion(int[][] matriz, IChromosome cromosoma){
 	
 		int indicecrom =0;
