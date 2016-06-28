@@ -10,7 +10,9 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	public ProblemaNMM(){};
 	
 	
-	@Override
+	/* El estado inicial es con el tablero vacio y empieza jugando el jugador!
+	 * 
+	 * */
 	public EstadoNMM initialState() {
 		int[] tab=new int[24];
 		Arrays.fill(tab, 0);
@@ -21,7 +23,9 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		return ini;
 	}
 
-	@Override
+	/*Obtiene los sucesores del estado pasado como parametro! teniendo en cuenta los movimientos
+	 * posibles dependiendo del estado actual
+	 * */
 	public List<EstadoNMM> getSuccessors(EstadoNMM state) {
 		List<EstadoNMM> sucesores = new LinkedList<EstadoNMM>();
 		int turno =state.getTurn();
@@ -64,7 +68,8 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		
 		return sucesores;
 	}
-
+	
+	/*indica si dos posiciones son adyacentes en el tablero*/
 	private boolean adyacentes(int i, int j) {
 		
 
@@ -108,7 +113,7 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 	}
 
 	
-	@Override
+	/*devuelve true si el estado pasado como parametro es un estado en donde hay un ganador.*/
 	public boolean end(EstadoNMM state) {
 		int[] aux=state.getTablero();
 		int cantFichasJ=0;
@@ -123,7 +128,8 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		return false;
 	}
 
-	
+	/*Funcion heuristica, donde valora primero la cantidad de fichas, luego los molinos y luego los
+	 * pares de fichas adyacentes iguales (los llamamos semimolinos)*/
 	public int value(EstadoNMM state) {
 		
 		int[] tabaux= state.getTablero();
@@ -134,15 +140,46 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		
 		if(end(state)){
 		
-			if(cantCPU<cantJ){return maxValue();}
-			if(cantCPU>cantJ){return minValue();}
+			if(cantCPU>cantJ||(state.getTurn()==1&&getSuccessors(state).size()==0)){return maxValue();}
+			
+			if(cantCPU<cantJ||(state.getTurn()==2&&getSuccessors(state).size()==0)){return minValue();}
 		}
 		
-		int res = 100 - (cantJ-cantCPU);
+		int res =10*(cantCPU-cantJ)+(semimolinos(state,2)-semimolinos(state,1)+(molinos(state,2)-molinos(state,1)));
 		
 		return res;
 	}
-
+	
+	/*Cuenta la cantidad de semimolinos en el tablero x2 */
+	public int semimolinos (EstadoNMM state, int ficha){
+		int res=0;
+		int[] tabaux=state.getTablero();
+		for(int i=0;i<24;i++){
+			for(int j=0;j<24;j++){
+				if(adyacentes(i,j)&&tabaux[i]==ficha&&tabaux[j]==ficha){
+					res++;
+				}
+			}
+		}
+		return res;
+	}
+	/*cuenta la cantidad de molinos x3*/
+	public int molinos (EstadoNMM state, int ficha){
+		int res=0;
+		int[] tabaux=state.getTablero();
+		for(int i =0;i<24;i++){
+			if(verificarMolino(i,tabaux,ficha)){
+				res++;
+				
+			}
+		}
+		return res;
+		
+	}
+	
+	
+	
+	/*min value y max value devuelven los valores minimos y maximos de la heuristica */
 	
 	public  int minValue() {
 		
@@ -155,6 +192,7 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		return 1000;
 	}
 	
+	/*cuenta las fichas del jugador j  en el tablero*/
 	private int contarFichas(int j,int[] tab){
 		int res=0;
 		
@@ -164,6 +202,8 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		return res;
 	}
 	
+	/*Inserta una ficha en la posicion i del tablero en el estado pasado como parametro,si se crea 
+	 * un molino, se vuelve a jugar y solo se puede eliminar*/
 	public  EstadoNMM insertarFicha(EstadoNMM state,int i){
 		
 		int[] tabaux=new int[24];
@@ -172,8 +212,15 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		};
 		EstadoNMM res=state;
 		int turno=state.getTurn();
+		int fichasTurno;
+		if(turno==1){
+			fichasTurno=state.getFichasJ();
+		}else{
+			fichasTurno=state.getFichasCPU();
+		}
 		
-		if(tabaux[i]==0){
+		
+		if(tabaux[i]==0&&fichasTurno>0&&state.getMovAp()!="Molino"){
 			tabaux[i]=turno;
 			if(verificarMolino(i,tabaux,turno)){
 				if(turno==1){
@@ -195,50 +242,69 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		return res;
 	}
 	
+	/*mueve una ficha desde la posicion origen a la posicion destino, en el tablero del estado pasado 
+	 * como parametro, si se crea  un molino, se vuelve a jugar y solo se puede eliminar*/
 	public EstadoNMM moverFicha(EstadoNMM state, int origen ,int destino){
 		int[] tabaux=new int[24];
 		for(int j=0;j<24;j++){tabaux[j]=state.getTablero()[j];}
 		int turno=state.getTurn();
-		tabaux[origen]=0;
-		tabaux[destino]=turno;
-		EstadoNMM res;
-		if(verificarMolino(destino,tabaux,turno)){
-			if(turno==1){
-				res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU());
-			}else{
-				res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU());
-			}
-			
+		EstadoNMM res=state;
+		int fichasTurno;
+		if(turno==1){
+			fichasTurno=state.getFichasJ();
 		}else{
-			if(turno==1){
-				res = new EstadoNMM(!state.isMax(),2,"se movio!",tabaux,state.getFichasJ(),state.getFichasCPU());
-			}else{
-				res = new EstadoNMM(!state.isMax(),1,"se movio!",tabaux,state.getFichasJ(),state.getFichasCPU());
-			}
-			
+			fichasTurno=state.getFichasCPU();
 		}
-		
+		if(origen<0||origen>23||destino>23||destino<0){
+			System.out.println("Coordenadas fuera de rango!");
+			return res;
+			}
+		if(tabaux[origen]==turno&&tabaux[destino]==0&&adyacentes(origen,destino)&&fichasTurno==0&&state.getMovAp()!="Molino!"){	
+			tabaux[origen]=0;
+			tabaux[destino]=turno;
+			if(verificarMolino(destino,tabaux,turno)){
+				if(turno==1){
+					res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+				}else{
+					res = new EstadoNMM(state.isMax(),turno,"Molino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+				}
+				
+			}else{
+				if(turno==1){
+					res = new EstadoNMM(!state.isMax(),2,"se movio!",tabaux,state.getFichasJ(),state.getFichasCPU());
+				}else{
+					res = new EstadoNMM(!state.isMax(),1,"se movio!",tabaux,state.getFichasJ(),state.getFichasCPU());
+				}
+				
+			}
+		}else{System.out.println("NO PODER MOVER ! INTENTE NUEVAMENTE!");}
 		
 		return res;
 	}
-	
-	
+	/*
+	 * elimina una ficha del tablero en la posicion i
+	 * */
 	public EstadoNMM eliminarFicha(EstadoNMM state, int i){
 		int[] tabaux=new int[24];
 		for(int j=0;j<24;j++){tabaux[j]=state.getTablero()[j];}
 		int turno=state.getTurn();
-		tabaux[i]=0;
-		EstadoNMM res;
-		if(turno==1){
-			res = new EstadoNMM(!state.isMax(),2,"se elimino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+
+		EstadoNMM res=state;
+		if(state.getMovAp()=="Molino!"&&tabaux[i]!=turno&&tabaux[i]!=0){	
+			tabaux[i]=0;
+			if(turno==1){
+				res = new EstadoNMM(!state.isMax(),2,"se elimino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+			}else{
+				res = new EstadoNMM(!state.isMax(),1,"se elimino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+			}
 		}else{
-			res = new EstadoNMM(!state.isMax(),1,"se elimino!",tabaux,state.getFichasJ(),state.getFichasCPU());
+			System.out.println("NO PODES ELIMINAR!! INTENTA HACER OTRA COSA!");
 		}
 		return res;
 	}
 	
 	
-	
+	/*verifica si en la posicion i de tablero tabaux hay un molino, con las fichas de turno*/
 	private static boolean verificarMolino(int i, int[] tabaux, int turno) {
 		if(((i==0)||(i==1)||(i==2))&&(tabaux[0]==turno)&&(tabaux[1]==turno)&&(tabaux[2]==turno)){return true;}
 		if(((i==3)||(i==4)||(i==5))&&(tabaux[3]==turno)&&(tabaux[4]==turno)&&(tabaux[5]==turno)){return true;}

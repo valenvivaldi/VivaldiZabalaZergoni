@@ -8,22 +8,21 @@ import framework.AdversarySearchState;
 
 public class MinMaxNMM extends AdversarySearchEngine<ProblemaNMM, EstadoNMM> {
 	
-
+	/*Constructora del engine
+	 * 
+	 * */
 	public MinMaxNMM(ProblemaNMM problema,int prof){
 		super();
 		problem =problema;
 		maxDepth = prof;
 	}
 
-
+	/*calcula el el valor del estado pasado como parametro*/
 	public int computeValue(EstadoNMM state) {
 		
 		return computeValue(state,maxDepth,-1000,1000);
 	}
-
-
-
-
+	/*llamada recursiva del computeValue*/
 	private int computeValue(EstadoNMM state, int depth, int alpha, int beta) {
 		if(problem.end(state)|| depth ==0){
 			return problem.value(state);
@@ -45,7 +44,8 @@ public class MinMaxNMM extends AdversarySearchEngine<ProblemaNMM, EstadoNMM> {
 		}
 	}
 
-
+	/*dado un estado pasado como parametro, devuelve el mejor sucesor que tiene (o sea , hace el "mejor" 
+	 * movimiento)*/
 	public EstadoNMM computeSuccessor(EstadoNMM state) {
 		List<EstadoNMM> sucesores = problem.getSuccessors(state);
 		EstadoNMM mejorEstado=null;

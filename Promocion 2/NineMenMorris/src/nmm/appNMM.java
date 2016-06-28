@@ -5,16 +5,19 @@ import java.util.Scanner;
 import framework.AdversarySearchEngine;
 
 public class appNMM {
+	
+	
+	
 	public static void main(String[] args){
 		ProblemaNMM problema = new ProblemaNMM();
 		EstadoNMM estadoActual = problema.initialState();
-		int prof=3;
+		int prof=4;
 		MinMaxNMM engine= new MinMaxNMM(problema,prof);
 		while(!(problema.end(estadoActual))){
 			mostrarJuego(estadoActual);
 			estadoActual=jugar(problema,estadoActual,engine);
 			
-			//1estadoActual=problema.insertarFicha(estadoActual,0);
+			
 			
 			
 		}
@@ -26,14 +29,29 @@ public class appNMM {
 		}
 		
 	}
-
+	
+	/*Esta funcion hace que, si es turno del jugador, le avise que puede hacer (si mover, insertar o eliminar) y
+	 * le pide la coordenada de la ficha a insertar, mover o eliminar...Si el turno es de la CPU, hace 
+	 * MinMax y juega el mov que mas le conviene*/
 	private static EstadoNMM jugar(ProblemaNMM problema,EstadoNMM estadoActual, MinMaxNMM engine) {
 		EstadoNMM res=null;
 		Scanner sc = new Scanner(System.in);
 		if(estadoActual.getTurn()==1){
-			System.out.println("juega usted, ingrese el num del comando: \n 1-insertar \n 2-mover \n 3-eliminar ");
-			int comando = sc.nextInt();
-			res =ejecutarComando(problema,estadoActual,comando);
+			if(estadoActual.getMovAp()=="Molino!"){
+				System.out.println("ESTAS EN UN MOLINO! TENES QUE ELIMINAR UNA FICHA ");
+				res =ejecutarComando(problema,estadoActual,3);
+			}else{
+				if(estadoActual.getFichasJ()>0){
+					System.out.println("TENES QUE INSERTAR UNA FICHA ");
+					res =ejecutarComando(problema,estadoActual,1);
+				}else{
+					System.out.println("TENES QUE MOVER UNA FICHA ");
+					res =ejecutarComando(problema,estadoActual,2);
+				}
+				
+			}
+			
+					
 			
 		}else{
 			res=engine.computeSuccessor(estadoActual);
@@ -41,7 +59,8 @@ public class appNMM {
 		};
 		return res;
 	}
-
+	/*Esta funcion ejecuta la accion del jugador*/
+	
 	private static EstadoNMM ejecutarComando(ProblemaNMM prob,EstadoNMM estadoActual,int comando) {
 		Scanner sc = new Scanner(System.in);
 		int coo ;
@@ -65,6 +84,7 @@ public class appNMM {
 		return res;
 	}
 
+	/*Esta funcion muestra de quien es el turno, y el tablero*/
 	private static void mostrarJuego(EstadoNMM estadoActual) {
 		System.out.println("TURNO DE:"+estadoActual.getTurn());
 		estadoActual.imprimir();
