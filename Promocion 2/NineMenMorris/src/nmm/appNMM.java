@@ -18,7 +18,7 @@ public class appNMM {
 			
 			
 		}
-		
+		mostrarJuego(estadoActual);
 		if(problema.value(estadoActual)<0){
 			System.out.println("GANO EL JUGADOR!!!");
 		}else{

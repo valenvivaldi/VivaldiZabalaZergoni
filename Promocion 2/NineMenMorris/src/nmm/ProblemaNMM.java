@@ -200,6 +200,7 @@ public class ProblemaNMM implements AdversarySearchProblem<EstadoNMM> {
 		for(int j=0;j<24;j++){tabaux[j]=state.getTablero()[j];}
 		int turno=state.getTurn();
 		tabaux[origen]=0;
+		tabaux[destino]=turno;
 		EstadoNMM res;
 		if(verificarMolino(destino,tabaux,turno)){
 			if(turno==1){
