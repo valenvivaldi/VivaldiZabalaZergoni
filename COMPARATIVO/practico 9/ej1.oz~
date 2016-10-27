@@ -1,0 +1,29 @@
+local Counter  in
+   class Counter
+      attr val
+      meth init(V)
+	 val := V
+      end
+      meth inc(V)
+	 val := @val + V
+      end
+      meth get
+	 @val
+      end
+   end
+   local C in
+      C = {New Counter init(0)}
+      {C inc(9)}
+      {Browse {C get}}
+   end
+end
+
+
+
+
+
+
+
+
+
+
