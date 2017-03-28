@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-29" view-index="0" gantt-divider-location="406" resource-divider-location="300" version="2.8.1" locale="es_AR">
+    <description/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="287" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="54" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="61" order="2"/>
+        <timeline><![CDATA[15,65,118,5,14,67,97,58]]></timeline>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="210" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="14" name="Preparacion (1)" color="#8cb6ce" meeting="false" start="2016-09-01" duration="1" complete="0" expand="true">
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="5" name="Creacion de Tests (2)" color="#8cb6ce" meeting="false" start="2016-09-02" duration="4" complete="0" expand="false">
+            <depend id="15" type="2" difference="0" hardness="Strong"/>
+            <task id="39" name="Test de carta" color="#8cb6ce" meeting="false" start="2016-09-02" duration="2" complete="0" thirdDate="2016-09-02" thirdDate-constraint="1" expand="true">
+                <depend id="159" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="23" name="Test de mazo" color="#8cb6ce" meeting="false" start="2016-09-02" duration="2" complete="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+                <depend id="159" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="27" name="test de jugador" color="#8cb6ce" meeting="false" start="2016-09-02" duration="2" complete="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+                <depend id="159" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="159" name="test de ronda" color="#8cb6ce" meeting="false" start="2016-09-06" duration="2" complete="0" expand="true"/>
+            <task id="29" name="test de juego" color="#8cb6ce" meeting="false" start="2016-09-06" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="15" name="Creacion de modelos" color="#8cb6ce" meeting="false" start="2016-09-08" duration="14" complete="0" expand="false">
+            <depend id="58" type="2" difference="0" hardness="Strong"/>
+            <task id="40" name="modelo de carta" color="#8cb6ce" meeting="false" start="2016-09-08" duration="2" complete="0" expand="true">
+                <depend id="41" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="41" name="modelo de mazo" color="#8cb6ce" meeting="false" start="2016-09-12" duration="4" complete="0" expand="true">
+                <depend id="43" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="42" name="modelo de jugador" color="#8cb6ce" meeting="false" start="2016-09-08" duration="2" complete="0" expand="true">
+                <depend id="43" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="43" name="modelo de ronda" color="#8cb6ce" meeting="false" start="2016-09-16" duration="6" complete="0" expand="true">
+                <depend id="56" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="56" name="agregar maquina de estados a ronda" color="#8cb6ce" meeting="false" start="2016-09-26" duration="1" complete="0" expand="true">
+                <depend id="44" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="44" name="modelo de juego" color="#8cb6ce" meeting="false" start="2016-09-27" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="58" name="Manejo de cartas" color="#000000" meeting="false" start="2016-09-28" duration="4" complete="0" expand="false">
+            <depend id="65" type="2" difference="0" hardness="Strong"/>
+            <task id="59" name="Metodo p/ repartir 3 cartas" color="#8cb6ce" meeting="false" start="2016-09-28" duration="2" complete="0" expand="true">
+                <depend id="60" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="60" name="Metodo p/ jugar carta en la mano" color="#8cb6ce" meeting="false" start="2016-09-30" duration="1" complete="0" expand="true">
+                <depend id="61" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="61" name="Metodo p/ comparar cartas jugadas" meeting="false" start="2016-10-03" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="65" name="Creacion del envido" color="#000000" meeting="false" start="2016-10-04" duration="5" complete="0" expand="false">
+            <depend id="67" type="2" difference="0" hardness="Strong"/>
+            <task id="68" name="poder cantar envido" color="#8cb6ce" meeting="false" start="2016-10-04" duration="2" complete="0" expand="true">
+                <depend id="69" type="2" difference="0" hardness="Strong"/>
+                <depend id="70" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="69" name="poder querer" color="#8cb6ce" meeting="false" start="2016-10-06" duration="1" complete="0" expand="true">
+                <depend id="71" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="70" name="poder rechazar" color="#8cb6ce" meeting="false" start="2016-10-06" duration="2" complete="0" expand="true"/>
+            <task id="71" name="decidir quien gana" color="#8cb6ce" meeting="false" start="2016-10-07" duration="2" complete="0" expand="true"/>
+        </task>
+        <task id="67" name="Creacion del truco" color="#000000" meeting="false" start="2016-10-11" duration="3" complete="0" thirdDate="2016-11-11" thirdDate-constraint="0" expand="false">
+            <depend id="97" type="2" difference="0" hardness="Strong"/>
+            <task id="79" name="poder cantar truco" meeting="false" start="2016-10-11" duration="1" complete="0" expand="true">
+                <depend id="80" type="2" difference="0" hardness="Strong"/>
+                <depend id="81" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="80" name="poder querer el truco" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true">
+                <depend id="82" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="81" name="poder rechazar el truco" color="#8cb6ce" meeting="false" start="2016-10-12" duration="2" complete="0" expand="true"/>
+            <task id="82" name="decidir quien gana" meeting="false" start="2016-10-13" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="97" name="Met. Manejo del juego y manos" color="#000000" meeting="false" start="2016-10-14" duration="3" complete="0" expand="false">
+            <depend id="118" type="2" difference="0" hardness="Strong"/>
+            <task id="98" name="poder ver los puntos" color="#8cb6ce" meeting="false" start="2016-10-14" duration="1" complete="0" expand="true">
+                <depend id="106" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="99" name="Fin de la partida a los 30p" color="#8cb6ce" meeting="false" start="2016-10-14" duration="1" complete="0" expand="true">
+                <depend id="107" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="105" name="gano  2 de 3" color="#8cb6ce" meeting="false" start="2016-10-14" duration="1" complete="0" expand="true">
+                <depend id="108" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="106" name="gano si: 1ra y emp" meeting="false" start="2016-10-17" duration="1" complete="0" expand="true"/>
+            <task id="107" name="gano si: emp y 2da" meeting="false" start="2016-10-17" duration="1" complete="0" expand="true">
+                <depend id="109" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="108" name="gano si: emp, emp, 3ra" meeting="false" start="2016-10-17" duration="1" complete="0" expand="true">
+                <depend id="110" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="109" name="gano si: emp, emp, emp y mano" meeting="false" start="2016-10-18" duration="1" complete="0" expand="true"/>
+            <task id="110" name="gano si: 1ra, pierdo y emp" meeting="false" start="2016-10-18" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="118" name="Desarrollo de la parte web" color="#000000" meeting="false" start="2016-10-19" duration="17" complete="0" expand="false">
+            <task id="121" name="quiero poder ver una landing" color="#8cb6ce" meeting="false" start="2016-10-19" duration="6" complete="0" expand="true">
+                <depend id="125" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="125" name="Persistencia MongoDB" color="#8cb6ce" meeting="false" start="2016-10-27" duration="6" complete="0" expand="true">
+                <depend id="153" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="153" name="Registro en passport" meeting="false" start="2016-11-04" duration="1" complete="0" expand="true">
+                <depend id="129" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="129" name="Iniciar sesion passport" meeting="false" start="2016-11-07" duration="1" complete="0" expand="true">
+                <depend id="133" type="2" difference="0" hardness="Strong"/>
+                <depend id="149" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="149" name="Cerrar sesion passport" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true"/>
+            <task id="133" name="Poder crear juego nuevo" meeting="false" start="2016-11-08" duration="1" complete="0" expand="true">
+                <depend id="135" type="2" difference="0" hardness="Strong"/>
+                <depend id="137" type="2" difference="0" hardness="Strong"/>
+                <depend id="139" type="2" difference="0" hardness="Strong"/>
+                <depend id="146" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="135" name="poder ver cartas que poseo (Jade)" meeting="false" start="2016-11-09" duration="1" complete="0" expand="true"/>
+            <task id="137" name="poder ver cartas ya jugadas (Jade)" meeting="false" start="2016-11-09" duration="1" complete="0" expand="true"/>
+            <task id="139" name="poder ver opciones para jugar" meeting="false" start="2016-11-09" duration="1" complete="0" expand="true">
+                <depend id="146" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="146" name="Aviso de ganador" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

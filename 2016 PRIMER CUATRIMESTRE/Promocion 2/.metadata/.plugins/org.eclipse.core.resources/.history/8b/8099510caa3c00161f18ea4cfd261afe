@@ -1,0 +1,53 @@
+package nmm;
+
+import java.util.Scanner;
+
+import framework.AdversarySearchEngine;
+
+public class appNMM {
+	public static void main(String[] args){
+		ProblemaNMM problema = new ProblemaNMM();
+		EstadoNMM estadoActual = problema.initialState();
+		int prof=3;
+		MinMaxNMM engine= new MinMaxNMM(problema,prof);
+		
+		
+		while(!(problema.end(estadoActual))){
+			mostrarJuego(estadoActual);
+			estadoActual=jugar(estadoActual,engine);
+			
+		}
+		if(problema.value(estadoActual)<0){
+			System.out.println("GANO EL JUGADOR!!!");
+		}else{
+			System.out.println("GANO LA MAQUINA!!!");
+		}
+		
+	}
+
+	private static EstadoNMM jugar(EstadoNMM estadoActual, MinMaxNMM engine) {
+		EstadoNMM res=null;
+		Scanner sc = new Scanner(System.in);
+		if(estadoActual.getTurn()==1){
+			System.out.println("juega usted, ingrese el comando:");
+			String comando = sc.nextLine();
+		}else{
+			res=engine.computeSuccessor(estadoActual);
+			
+		};
+		return res;
+	}
+
+	private static void mostrarJuego(EstadoNMM estadoActual) {
+		System.out.println("TURNO DE:"+estadoActual.getTurn());
+		estadoActual.imprimir();
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+}

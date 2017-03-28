@@ -1,0 +1,34 @@
+"TITULO
+",Puntos Estimaci—n
+como usuario quiero tener un test del modelo mazo para poder verificar su representaci—n,1
+como dev quiero tener un test del modelo jugador para poder verificar su representaci—n,1
+como dev quiero tener un test del modelo ronda para poder verificar su representaci—n,1
+como dev quiero tener un test del modelo juego para poder verificar su representaci—n,1
+como dev quiero tener un modelo de carta para poder modelar un mazo,1
+como dev quiero modelar un jugador de la partida para poder crear un modelo del juego,1
+como dev quiero tener un modelo de mazo para poder asignar las cartas a los jugadores,2
+como dev quiero poder tener un modelo que represente una ronda del juego,3
+agregar maquina de estados al modelo de ronda,2
+como dev quiero poseer un modelo de juego,3
+como player quiero poder repartir 3 cartas,1
+como player quiero poder jugar una carta,0
+"como dev quiero poder saber que carta vale mas, comparando dos, para poder decidir que jugador gana la mano",0
+como player quiero poder cantar envido,1
+"como player quiero poder ""querer"" el envido",0
+"como player quiero decir ""no quiero"" al envido",1
+"como dev quiero saber que jugador tiene mas puntos para el envido, para poder saber quien gana el envido",1
+como player quiero poder cantar truco,0
+"como player quiero poder decir ""quiero"" al truco",0
+"como player quiero poder decir "" no quiero"" al truco",1
+como player quiero poder visualizar mis puntos y los de mi adversario durante el juego,0
+como player quiero poder ganar el juego cuando mis puntos lleguen a 30 antes que los de mi adversario,0
+como player quiero poder ganar la ronda cuando gane 2 de 3 manos,0
+como player quiero poder ganar la ronda si gano la primera mano y se emparda en la segunda mano,0
+como player quiero poder ganar la ronda se emparda la primer mano y gano la segunda mano,0
+como player quiero poder ganar la ronda si empardo las 2 primeras manos y gano la tercera,0
+como player quiero poder ganar la ronda si empardamos las 3 manos y yo soy el jugador mano,0
+"como player quiero poder ganar la ronda si gano la primera mano, pierdo en la segunda y se emparda en la tercera  mano",0
+como guest quiero ver una landing,5
+como dev quiero que el juego se guarde en una base de datos persistente,3
+como guest quiero poder registrarme,1
+como user quiero poder iniciar sesi—n,0

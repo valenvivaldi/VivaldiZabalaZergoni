@@ -1,0 +1,7 @@
+npm install --save-dev plato
+
+node_module/plato/bin/plato -r -d report models/
+
+npm install --save-dev istanbul
+
+node_modules/istanbul cover test
