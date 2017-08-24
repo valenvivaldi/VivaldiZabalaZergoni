@@ -1,0 +1,53 @@
+CREATE TABLE Cliente (
+						nro_cliente INTEGER ,
+						apellido varchar(20) ,
+						nombre varchar(20),
+						direccion varchar(20),
+						telefono varchar(20),
+                        CONSTRAINT pknrocliente PRIMARY KEY(nro_cliente)
+                        );
+ 
+ 
+CREATE TABLE Producto (
+						cod_producto INTEGER ,
+						 descripcion varchar(20) ,
+						 precio float,
+						 stock_minimo integer,
+						 stock_maximo integer,
+						 cantidad integer,
+                         CONSTRAINT pknroproducto PRIMARY KEY(cod_producto),
+						 
+						 CONSTRAINT control_min_max CHECK (stock_minimo<stock_maximo),
+						 CONSTRAINT control_precio CHECK (precio>0)
+						 
+						 );
+
+
+
+
+
+
+CREATE TABLE Factura(
+					nro_factura INTEGER, 
+					nro_cliente INTEGER,
+					fecha date, 
+					monto float,
+					CONSTRAINT pkFactura PRIMARY KEY (nro_factura),
+					CONSTRAINT cfFactura FOREIGN KEY (nro_cliente) REFERENCES Cliente(nro_cliente) ON DELETE CASCADE
+
+
+
+);
+
+
+CREATE TABLE ItemFactura (
+					cod_producto INTEGER , 
+					nro_factura integer ,
+					cantidad integer, 
+					precio float,
+					CONSTRAINT pkItemFactura PRIMARY KEY (cod_producto,nro_factura),
+					CONSTRAINT cfItemFactura1 FOREIGN KEY (cod_producto) REFERENCES Producto(cod_producto) ,
+					CONSTRAINT cfItemFactura2 FOREIGN KEY (nro_factura) REFERENCES Factura(nro_factura)
+
+
+);

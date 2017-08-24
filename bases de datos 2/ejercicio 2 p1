@@ -1,0 +1,65 @@
+Vehiculo (#patente, marca, modelo, color, saldoActual) 
+Persona (dni, nombreYApellido, direccion) 
+Dueño (#patente, dni)            los dos son clave
+Estacionamiento  (#estacionamiento,  #patente,  #parquímetro,  fecha,  saldoInicio, 
+saldoFinal, horaEntrada, horaSalida) 
+Parquímetro (#parquímetro, calle, altura) 
+
+CREATE DOMAIN color AS varchar(10) check(value in ('negro','gris','azul')) not null;
+
+CREATE TABLE Vehiculo (
+						nro_patente varchar(20) ,
+						marca varchar(20) ,
+						modelo varchar(20),
+						color varchar(20),
+						saldoActual float,
+                        CONSTRAINT pkvehiculo PRIMARY KEY(nro_patente)
+                        );
+ 
+CREATE DOMAIN nyap AS varchar(45) ; 
+CREATE TABLE Persona (
+						dni INTEGER ,
+						 nombreYApellido nyap,
+						 direccion varchar(30),
+                         CONSTRAINT pknpersona PRIMARY KEY(dni)
+						 );
+
+CREATE TABLE Duenio(
+					cod_producto INTEGER , 
+					nro_factura integer ,
+					cantidad integer, 
+					precio float,
+					CONSTRAINT pkItemFactura PRIMARY KEY (cod_producto,nro_factura),
+					CONSTRAINT cfItemFactura1 FOREIGN KEY (cod_producto) REFERENCES Producto(cod_producto) ,
+					CONSTRAINT cfItemFactura2 FOREIGN KEY (nro_factura) REFERENCES Factura(nro_factura)
+
+
+);
+
+
+
+
+CREATE TABLE Factura(
+					nro_factura INTEGER, 
+					nro_cliente INTEGER,
+					fecha date, 
+					monto float,
+					CONSTRAINT pkFactura PRIMARY KEY (nro_factura),
+					CONSTRAINT cfFactura FOREIGN KEY (nro_cliente) REFERENCES Cliente(nro_cliente) ON DELETE CASCADE
+
+
+
+);
+
+
+CREATE TABLE ItemFactura (
+					cod_producto INTEGER , 
+					nro_factura integer ,
+					cantidad integer, 
+					precio float,
+					CONSTRAINT pkItemFactura PRIMARY KEY (cod_producto,nro_factura),
+					CONSTRAINT cfItemFactura1 FOREIGN KEY (cod_producto) REFERENCES Producto(cod_producto) ,
+					CONSTRAINT cfItemFactura2 FOREIGN KEY (nro_factura) REFERENCES Factura(nro_factura)
+
+
+);
